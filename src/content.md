@@ -144,6 +144,14 @@ Own templates:
 
 ##
 
+Citations:
+
+````sh
+sudo apt-get install pandoc-citeproc
+````
+
+##
+
 Alternatively, you could also circumvent raw LaTeX with:
 
 - [LyX](www.lyx.org)
