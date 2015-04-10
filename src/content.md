@@ -233,6 +233,7 @@ https://github.com/cgroll/pandoc_custom.git master --squash
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
 extensions: ["tex2jax.js"],
+TeX: { equationNumbers: { autoNumber: "AMS" } },
 jax: ["input/TeX","output/HTML-CSS"],
 tex2jax: {inlineMath: [["$$","$$"],["\\(","\\)"]]}});
 </script>
@@ -256,13 +257,80 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 
 ##
 
-MathJax rendered:
+MathJax rendered
 
-$$
-\gamma(n)=\sum_{i=1}^{n}x^{2}
-$$
+- labeled and numbered equation:
+
+````latex
+
+$$\begin{equation}
+\alpha = \beta
+\label{eq:sample}
+\end{equation}$$
+
+````
+
+$$\begin{equation}
+\alpha = \beta
+\label{eq:sample}
+\end{equation}$$
+
+##
+
+- labeled aligned equations, single number:
+
+````latex
+
+$$\begin{equation}
+\begin{split} 
+\gamma(n)&=\sum_{i=1}^{n}x^{2}\\
+&=\sum_{i=1}^{n}x\cdot x
+\end{split}
+\label{eq:splitSample}
+\end{equation}$$
+
+````
+
+$$\begin{equation}
+\begin{split} 
+\gamma(n)&=\sum_{i=1}^{n}x^{2}\\
+&=\sum_{i=1}^{n}x\cdot x
+\end{split}
+\label{eq:splitSample}
+\end{equation}$$
+
+## 
+
+- aligned equations, one number per line, single label
+
+````latex
+
+$$\begin{align}
+\gamma(n)&=\sum_{i=1}^{n}x^{2}\\
+&=\sum_{i=1}^{n}x\cdot x
+\label{eq:alignedSample}
+\end{align}$$
+````
+
+$$\begin{align}
+\gamma(n)&=\sum_{i=1}^{n}x^{2}\\
+&=\sum_{i=1}^{n}x\cdot x
+\label{eq:alignedSample}
+\end{align}$$
 
 
+##
+
+- referring to equations in text
+
+````
+
+Referring to equations $\eqref{eq:sample}$, $\eqref{eq:splitSample}$
+and $\eqref{eq:alignedSample}$.
+````
+
+Referring to equations $\eqref{eq:sample}$, $\eqref{eq:splitSample}$
+and $\eqref{eq:alignedSample}$.
 
 ## Citations
 
@@ -303,6 +371,14 @@ sudo apt-get install pandoc-citeproc
 }
 ````
 
+##
+
+- meanwhile bibtex entries for most references are readily available
+- simply google for reference + bibtex
+- export bibtex from
+  [page](http://www.citeulike.org/user/felixroudier/author/Rubinstein) 
+
+
 ## [Citation Style Language](http://citationstyles.org/)
 
 - define style of references and bibliography in *.csl* file
@@ -325,13 +401,33 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 
 - cite reference
 
-````
-... according to [@citeulike:1232469].
-````
+	````
+	... according to [@citeulike:1232469].
+	````
 
-... according to [@citeulike:1232469].
+	... according to [@citeulike:1232469].
 
 - references will appear automatically in bibliography at the end
+
+## 
+
+Internal links
+
+- link to section
+
+````
+
+Still remember [the git introduction](#git)?
+````
+
+Still remember [the git introduction](#git)?
+
+##
+
+- link to [equation][my label 3]
+
+[my label 3]: http://fsf.org
+  "The free software foundation"
 
 
 ##
