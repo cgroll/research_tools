@@ -181,7 +181,7 @@ cd ../css
 ln -s reveal.css reveal.min.css 
 ````
 
-## 
+## [MathJax](http://www.mathjax.org/)
 
 - including mathematical formulas:
 
@@ -207,23 +207,45 @@ $$
 
 ##
 
-- setting paths: **better solution**
-- custom pandoc [template files](https://github.com/cgroll/pandoc_custom)
+- better solution for setting paths
+- custom pandoc [template files](https://github.com/cgroll/pandoc_custom) 
 
 ````sh
 
 git clone https://github.com/cgroll/pandoc_custom.git
 ````
 
-## [MathJax](http://www.mathjax.org/)
+- or as **git subtree**:
+
+````sh
+
+git subtree add --prefix pandoc_custom \
+https://github.com/cgroll/pandoc_custom.git master --squash
+````
 
 
-$$
-\gamma(n)=\sum_{i=1}^{n}x^{2}
-$$
+## 
+
+- example MathJax code in template:
+
+````
+<!-- include local MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+extensions: ["tex2jax.js"],
+jax: ["input/TeX","output/HTML-CSS"],
+tex2jax: {inlineMath: [["$$","$$"],["\\(","\\)"]]}});
+</script>
+<script type="text/javascript" src="../MathJax/MathJax.js"></script>
+
+````
+
+⇒ set MathJax path according to your needs!
 
 
-##
+## 
+
+- link to template file in pandoc command
 
 ````sh
 
@@ -232,15 +254,85 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 -f markdown -o output/content.slides.html src/content.md
 ````
 
+##
+
+MathJax rendered:
+
+$$
+\gamma(n)=\sum_{i=1}^{n}x^{2}
+$$
+
+
+
+## Citations
+
+-
+  [pandoc-citeproc](http://hackage.haskell.org/package/pandoc-citeproc):
+ 
+> "a library for rendering bibliographic reference citations into a
+> variety of styles using a macro language called Citation Style
+> Language (CSL)"
 
 ##
 
-Citations:
+- Linux installation:
 
 ````sh
 
 sudo apt-get install pandoc-citeproc
 ````
+
+##
+
+- keep list of references in bibtex format
+
+````
+@article{citeulike:1232469,
+    author = {Rubinstein, Mark},
+    citeulike-article-id = {1232469},
+    citeulike-linkout-0 = {http://www.jstor.org/stable/2697771},
+    journal = {The Journal of Finance},
+    number = {3},
+    pages = {1041--1045},
+    posted-at = {2007-04-17 17:49:48},
+    priority = {0},
+    title = {{Markowitz's \"Portfolio Selection\";: A Fifty-Year Retrospective}},
+    url = {http://www.jstor.org/stable/2697771},
+    volume = {57},
+    year = {2002}
+}
+````
+
+## [Citation Style Language](http://citationstyles.org/)
+
+- define style of references and bibliography in *.csl* file
+- [search citation styles](http://editor.citationstyles.org/about/)
+
+## 
+
+- pre-process citations in pandoc
+
+````
+
+pandoc --template=pandoc_custom/templates/revealjs.template \
+-s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+--filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
+--bibliography=refs.bib \
+-o output/content.slides.html src/content.md
+````
+
+## 
+
+- cite reference
+
+````
+... according to [@citeulike:1232469].
+````
+
+... according to [@citeulike:1232469].
+
+- references will appear automatically in bibliography at the end
+
 
 ##
 
@@ -268,3 +360,8 @@ Alternatively, you could also circumvent raw LaTeX with:
 ##
 - [beaker notebook](http://beakernotebook.com/)
 - [Jupyter](http://jupyter.org/)
+
+
+## References
+
+
