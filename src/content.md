@@ -10,6 +10,8 @@
 ##
 
 - git was created to managed cooperative work on the Linux kernel
+
+- [myrepos](http://myrepos.branchable.com/)
   
 ## Installation
 
@@ -263,29 +265,80 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 
 MathJax rendered
 
-- labeled and numbered equation:
-  
+- equation without number
+
 ````latex
+$$\alpha^{2} = \beta^{2}$$
+````
+
+$$\alpha^{2} = \beta^{2}$$
+
+##
+
+- using latex equation environment currently requires different syntax
+  for `html` and `pdf` output
+
+- labeled and numbered equation, `html`:
+  
+	````latex
+	
+	$$\begin{equation}
+	\alpha = \beta
+	\label{eq:sample}
+	\end{equation}$$
+	````
+
+##
+
+- same formula for `pdf` output:
+
+	````latex
+	
+	\begin{equation}
+	\alpha = \beta
+	\label{eq:sample}
+	\end{equation}
+	````
+
+## 
+
+- both options are parsed differently 
+- to get parsed contents, export to `native` format
+
+````sh
+
+pandoc -t native src/content.md -o output/content_native.txt
+````
+
+##
+
+- the equations will appear as
+
+````
+
+,Para [Math DisplayMath "\\begin{equation}\n\\alpha = \\beta\n\\label{eq:sample}\n\\end{equation}"]
+,RawBlock (Format "latex") "\\begin{equation}\n\\alpha = \\beta\n\\label{eq:sample}\n\\end{equation}"
+````
+$\Rightarrow$ using an appropriate `--filter` option might solve the problem
+
+## 
+
+- especially for latex, errors can be hard to find
+- it might help to look at the raw produced `tex` file
+
+````sh
+
+pandoc -t latex -f markdown -s -o output/content.tex
+````
+
+##
+
+- labeled and numbered equation:
 
 $$\begin{equation}
 \alpha = \beta
 \label{eq:sample}
 \end{equation}$$
-
-````
-
-$$\alpha^{2} = \beta^{2}$$
-
-\begin{equation}
-\alpha = \beta
-\label{eq:sample}
-\end{equation}
-
-\begin{equation}
-\alpha = \beta
-\label{eq:sample}
-\end{equation}
-
 
 ##
 
@@ -303,13 +356,13 @@ $$\begin{equation}
 
 ````
 
-\begin{equation}
+$$\begin{equation}
 \begin{split} 
 \gamma(n)&=\sum_{i=1}^{n}x^{2}\\
 &=\sum_{i=1}^{n}x\cdot x
 \end{split}
 \label{eq:splitSample}
-\end{equation}
+\end{equation}$$
 
 ## 
 
@@ -325,11 +378,11 @@ $$\begin{align}
 ````
 
 
-\begin{align}
+$$\begin{align}
 \gamma(n)&=\sum_{i=1}^{n}x^{2}\\
 &=\sum_{i=1}^{n}x\cdot x
 \label{eq:alignedSample}
-\end{align}
+\end{align}$$
 
 
 
@@ -345,6 +398,7 @@ and $\eqref{eq:alignedSample}$.
 
 Referring to equations $\eqref{eq:sample}$, $\eqref{eq:splitSample}$
 and $\eqref{eq:alignedSample}$.
+
 
 ## Citations
 

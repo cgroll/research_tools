@@ -6,6 +6,8 @@ FILES = content.slides.html content.pdf
 OUTDIR = output
 OUT := $(addprefix $(OUTDIR)/,$(FILES))
 
+html: output/content.slides.html
+
 all: $(OUT)
 
 $(OUTDIR)/content.slides.html: src/content.md Makefile refs.bib
@@ -18,6 +20,7 @@ $(OUTDIR)/content.slides.html: src/content.md Makefile refs.bib
 $(OUTDIR)/content.pdf: src/content.md Makefile refs.bib
 	pandoc -s -t beamer -f markdown \
 	--mathjax \
+	--filter=./pandoc_custom/filters/amsmath.hs \
 	--filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
 	--bibliography=refs.bib \
 	-o output/content.pdf src/content.md
