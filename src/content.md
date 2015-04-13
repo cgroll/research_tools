@@ -276,10 +276,10 @@ $$\begin{equation}
 
 $$\alpha^{2} = \beta^{2}$$
 
-$$\begin{equation}
+\begin{equation}
 \alpha = \beta
 \label{eq:sample}
-\end{equation}$$
+\end{equation}
 
 \begin{equation}
 \alpha = \beta
