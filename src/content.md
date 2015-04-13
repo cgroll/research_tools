@@ -3,9 +3,10 @@
 
 # [git](http://www.git-scm.com/)
 
-##
+## Resources
 
-- [Software Carpentry](http://swcarpentry.github.io/git-novice/)
+- 
+- git lessons at [Software Carpentry](http://swcarpentry.github.io/git-novice/)
 
 ##
 
@@ -489,6 +490,11 @@ Still remember [the git introduction](#git)?
 ````
 
 Still remember [the git introduction](#git)?
+
+## Resources
+
+- [John MacFarlane, slides](http://johnmacfarlane.net/BayHac2014/#/)
+- [John MacFarlane, video](https://youtu.be/6TBpB-BEiIg)
 
 
 ## Pandoc alternatives
