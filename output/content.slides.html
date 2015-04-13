@@ -73,7 +73,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </section><section id="section-1" class="slide level2">
 <h1></h1>
 <ul>
-<li>git was created to managed cooperative work on the Linux kernel</li>
+<li><p>git was created to managed cooperative work on the Linux kernel</p></li>
+<li><p><a href="http://myrepos.branchable.com/">myrepos</a></p></li>
 </ul>
 </section><section id="installation" class="slide level2">
 <h1>Installation</h1>
@@ -263,17 +264,66 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 <h1></h1>
 <p>MathJax rendered</p>
 <ul>
-<li>labeled and numbered equation:</li>
+<li>equation without number</li>
 </ul>
+<pre class="sourceCode latex"><code class="sourceCode latex">$$\alpha^{2} = \beta^{2}$$</code></pre>
+<p><br /><span class="math"><em>α</em><sup>2</sup> = <em>β</em><sup>2</sup></span><br /></p>
+</section><section id="section-19" class="slide level2">
+<h1></h1>
+<ul>
+<li><p>using latex equation environment currently requires different syntax for <code>html</code> and <code>pdf</code> output</p></li>
+<li><p>labeled and numbered equation, <code>html</code>:</p>
 <pre class="sourceCode latex"><code class="sourceCode latex">
 $$<span class="al">\begin{equation}</span>
 \alpha = \beta
 \label{eq:sample}
-<span class="al">\end{equation}</span>$$</code></pre>
-<p><br /><span class="math"><em>α</em><sup>2</sup> = <em>β</em><sup>2</sup></span><br /></p>
-
-
-</section><section id="section-19" class="slide level2">
+<span class="al">\end{equation}</span>$$</code></pre></li>
+</ul>
+</section><section id="section-20" class="slide level2">
+<h1></h1>
+<ul>
+<li><p>same formula for <code>pdf</code> output:</p>
+<pre class="sourceCode latex"><code class="sourceCode latex">
+\begin{equation}
+\alpha = \beta
+\label{eq:sample}
+\end{equation}</code></pre></li>
+</ul>
+</section><section id="section-21" class="slide level2">
+<h1></h1>
+<ul>
+<li>both options are parsed differently</li>
+<li>to get parsed contents, export to <code>native</code> format</li>
+</ul>
+<pre class="sh"><code>
+pandoc -t native src/content.md -o output/content_native.txt</code></pre>
+</section><section id="section-22" class="slide level2">
+<h1></h1>
+<ul>
+<li>the equations will appear as</li>
+</ul>
+<pre><code>
+,Para [Math DisplayMath &quot;\\begin{equation}\n\\alpha = \\beta\n\\label{eq:sample}\n\\end{equation}&quot;]
+,RawBlock (Format &quot;latex&quot;) &quot;\\begin{equation}\n\\alpha = \\beta\n\\label{eq:sample}\n\\end{equation}&quot;</code></pre>
+<p><span class="math"> ⇒ </span> using an appropriate <code>--filter</code> option might solve the problem</p>
+</section><section id="section-23" class="slide level2">
+<h1></h1>
+<ul>
+<li>especially for latex, errors can be hard to find</li>
+<li>it might help to look at the raw produced <code>tex</code> file</li>
+</ul>
+<pre class="sh"><code>
+pandoc -t latex -f markdown -s -o output/content.tex</code></pre>
+</section><section id="section-24" class="slide level2">
+<h1></h1>
+<ul>
+<li>labeled and numbered equation:</li>
+</ul>
+<p><br /><span class="math">$$\begin{equation}
+\alpha = \beta
+\label{eq:sample}
+\end{equation}$$</span><br /></p>
+</section><section id="section-25" class="slide level2">
 <h1></h1>
 <ul>
 <li>labeled aligned equations, single number:</li>
@@ -286,8 +336,14 @@ $$<span class="al">\begin{equation}</span>
 \end{split}
 \label{eq:splitSample}
 <span class="al">\end{equation}</span>$$</code></pre>
-
-</section><section id="section-20" class="slide level2">
+<p><br /><span class="math">$$\begin{equation}
+\begin{split} 
+\gamma(n)&amp;=\sum_{i=1}^{n}x^{2}\\
+&amp;=\sum_{i=1}^{n}x\cdot x
+\end{split}
+\label{eq:splitSample}
+\end{equation}$$</span><br /></p>
+</section><section id="section-26" class="slide level2">
 <h1></h1>
 <ul>
 <li>aligned equations, one number per line, single label</li>
@@ -298,8 +354,12 @@ $$<span class="al">\begin{align}</span>
 &amp;=\sum_{i=1}^{n}x\cdot x
 \label{eq:alignedSample}
 <span class="al">\end{align}</span>$$</code></pre>
-
-</section><section id="section-21" class="slide level2">
+<p><br /><span class="math">$$\begin{align}
+\gamma(n)&amp;=\sum_{i=1}^{n}x^{2}\\
+&amp;=\sum_{i=1}^{n}x\cdot x
+\label{eq:alignedSample}
+\end{align}$$</span><br /></p>
+</section><section id="section-27" class="slide level2">
 <h1></h1>
 <ul>
 <li>referring to equations in text</li>
@@ -316,14 +376,14 @@ and $\eqref{eq:alignedSample}$.</code></pre>
 <blockquote>
 <p>&quot;a library for rendering bibliographic reference citations into a variety of styles using a macro language called Citation Style Language (CSL)&quot;</p>
 </blockquote>
-</section><section id="section-22" class="slide level2">
+</section><section id="section-28" class="slide level2">
 <h1></h1>
 <ul>
 <li>Linux installation:</li>
 </ul>
 <pre class="sh"><code>
 sudo apt-get install pandoc-citeproc</code></pre>
-</section><section id="section-23" class="slide level2">
+</section><section id="section-29" class="slide level2">
 <h1></h1>
 <ul>
 <li>keep list of references in bibtex format</li>
@@ -342,7 +402,7 @@ url = {http://www.jstor.org/stable/2697771},
 volume = {57},
 year = {2002}
 }</code></pre>
-</section><section id="section-24" class="slide level2">
+</section><section id="section-30" class="slide level2">
 <h1></h1>
 <ul>
 <li>meanwhile bibtex entries for most references are readily available</li>
@@ -355,7 +415,7 @@ year = {2002}
 <li>define style of references and bibliography in <em>.csl</em> file</li>
 <li><a href="http://editor.citationstyles.org/about/">search citation styles</a></li>
 </ul>
-</section><section id="section-25" class="slide level2">
+</section><section id="section-31" class="slide level2">
 <h1></h1>
 <ul>
 <li>pre-process citations in pandoc</li>
@@ -366,7 +426,7 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
 --bibliography=refs.bib \
 -o output/content.slides.html src/content.md</code></pre>
-</section><section id="section-26" class="slide level2">
+</section><section id="section-32" class="slide level2">
 <h1></h1>
 <ul>
 <li>cite reference</li>
@@ -376,7 +436,7 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 <ul>
 <li>references will appear automatically in bibliography at the end</li>
 </ul>
-</section><section id="section-27" class="slide level2">
+</section><section id="section-33" class="slide level2">
 <h1></h1>
 <p>Internal links</p>
 <ul>
@@ -399,7 +459,7 @@ Still remember [the git introduction](#git)?</code></pre>
 <li>using command line allows for easy automation of repetitive tasks</li>
 <li>GUIs and mouse clicks are a lot less easy to automate</li>
 </ul>
-</section><section id="section-28" class="slide level2">
+</section><section id="section-34" class="slide level2">
 <h1></h1>
 <p>Starting small</p>
 <ul>
@@ -413,7 +473,7 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 <li><p>call script with</p>
 <pre class="sh"><code>sh export.sh   </code></pre></li>
 </ul>
-</section><section id="section-29" class="slide level2">
+</section><section id="section-35" class="slide level2">
 <h1></h1>
 <p>Improvements:</p>
 <ul>
@@ -421,7 +481,7 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 <li>subsume multiple commands with pattern rules</li>
 </ul>
 <p><span class="math"> ⇒ </span> use a <code>Makefile</code></p>
-</section><section id="section-30" class="slide level2">
+</section><section id="section-36" class="slide level2">
 <h1></h1>
 <ul>
 <li>set target files with dependencies</li>
@@ -429,7 +489,7 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 <li>target file does not exist</li>
 <li>last modification of dependency is more recent than last modification of target file</li>
 </ul>
-</section><section id="section-31" class="slide level2">
+</section><section id="section-37" class="slide level2">
 <h1></h1>
 <ul>
 <li>create <code>Makefile</code></li>
@@ -446,7 +506,7 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
     --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
     --bibliography=refs.bib \
     -o output/content.slides.html src/content.md</code></pre>
-</section><section id="section-32" class="slide level2">
+</section><section id="section-38" class="slide level2">
 <h1></h1>
 <ul>
 <li><p>you can build individual targets by calling <code>Make</code> on them:</p>
@@ -454,14 +514,14 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 make output/content.slides.html</code></pre></li>
 <li><p>if no argument is specified, <code>Make</code> automatically builds the first target appearing in a <code>Makefile</code></p></li>
 </ul>
-</section><section id="section-33" class="slide level2">
+</section><section id="section-39" class="slide level2">
 <h1></h1>
 <ul>
 <li>adding an additional output target</li>
 </ul>
 <pre class="make"><code>
 </code></pre>
-</section><section id="section-34" class="slide level2">
+</section><section id="section-40" class="slide level2">
 <h1></h1>
 <p>dummy targets:</p>
 <ul>
@@ -474,14 +534,14 @@ make output/content.slides.html</code></pre></li>
 </ul>
 </section></section>
 <section><section id="coding-best-practices" class="titleslide slide level1"><h1>coding: best practices</h1></section></section>
-<section><section id="julia" class="titleslide slide level1"><h1><a href="http://julialang.org/">Julia</a></h1></section><section id="section-35" class="slide level2">
+<section><section id="julia" class="titleslide slide level1"><h1><a href="http://julialang.org/">Julia</a></h1></section><section id="section-41" class="slide level2">
 <h1></h1>
 <ul>
 <li>IJulia</li>
 <li>notebook files</li>
 </ul>
 </section></section>
-<section><section id="notebook-environments" class="titleslide slide level1"><h1>Notebook environments</h1></section><section id="section-36" class="slide level2">
+<section><section id="notebook-environments" class="titleslide slide level1"><h1>Notebook environments</h1></section><section id="section-42" class="slide level2">
 <h1></h1>
 <ul>
 <li><a href="http://beakernotebook.com/">beaker notebook</a></li>
