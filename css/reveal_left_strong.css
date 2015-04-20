@@ -1,0 +1,21 @@
+<style type="text/css">
+p { text-align: left; }
+.reveal ul {
+    width: 900px;
+}
+
+.reveal strong { color: lawngreen;
+                 font-style: normal;
+                 font-weight: bold;
+               }
+
+/* all headers are transformed to h1 by reveal.js, */
+/* even individual slide headers. */
+/* hence, h1 font size should not be too large */
+.reveal h1 { 
+    font-style: normal;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+</style>
