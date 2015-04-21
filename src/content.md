@@ -5,7 +5,7 @@
 
 ## git overview
 
-### origin
+## origin
 
 - git was created to improve cooperative work on the Linux kernel:
 
@@ -13,7 +13,7 @@
 > designed to handle everything from small to very large projects with
 > speed and efficiency."
 
-### Why git?
+## Why git?
 
 - robust cooperation
 
@@ -36,7 +36,7 @@
 - more generally: keep multiple versions of file (stable / development
   version)
 
-### [github](www.github.com)
+## [github](www.github.com)
 
 - free code hosting platform in perfect alignment with git
   repositories
@@ -52,13 +52,13 @@
 
 ## Installation / configuration
 
-### Setup targets
+## Setup targets
 
 - install and configure git
 - register at github
 - enable ssh access to github
 
-### On Linux machine
+## On Linux machine
 
 - git is usually installed upfront
 - otherwise: use package manager (for example on Ubuntu)
@@ -67,7 +67,7 @@
 	sudo apt-get install git
 	````
 
-### [git config](https://help.github.com/articles/set-up-git/)
+## [git config](https://help.github.com/articles/set-up-git/)
 
 associate yourself with your work:
 
@@ -85,12 +85,12 @@ associate yourself with your work:
 git config --global user.email "groll.christian.edu@gmail.com"
 ````
 
-###  github setup
+##  github setup
 
 - register at github
 - [set up SSH keys](https://help.github.com/articles/generating-ssh-keys/)
 
-### On Windows machine
+## On Windows machine
 
 - easiest way to install git: [github for
   windows](https://windows.github.com/) (see [installation
@@ -102,7 +102,7 @@ git config --global user.email "groll.christian.edu@gmail.com"
 
 ## git how to
 
-### Repository vs folder
+## Repository vs folder
 
 - a git project is called repository
 
@@ -119,7 +119,7 @@ git config --global user.email "groll.christian.edu@gmail.com"
 - for all files within the repository git contains the current version
   and all past versions
 
-### 
+## 
 
 Files basically can be in one of the following states:
 
@@ -129,7 +129,7 @@ Files basically can be in one of the following states:
 	- either: files are visible in git
 	- or: files can be ignored by `gitignore`
 
-###
+##
 
 Controlled by git:
 
@@ -152,7 +152,7 @@ Controlled by git:
 	git status
 	````
 
-###
+##
 
 - files and changes need to be added to git:
 
@@ -170,7 +170,7 @@ Controlled by git:
   (commit): for example, all changes related to the creation of a
   certain graphic
 
-### commits
+## commits
 
 - a commit is a group of changes (difference between states of
   project)
@@ -190,13 +190,13 @@ Controlled by git:
 - the project snapshot only exists for those files in the folder that
   are put under git's control
 
-### remotes
+## remotes
 
-### branches
+## branches
 
 ## workflow
 
-### Commit own changes
+## Commit own changes
 
 - add modifications to `git`:
 	- `git add`
@@ -211,7 +211,7 @@ Controlled by git:
 - new files may be kept outside of the repository, but cause problems
   when merging with state of repository where files are present
 
-### get changes from remote
+## get changes from remote
 
 - as all merges must occur locally, possible changes on the remote
   need to be merged first 
@@ -223,7 +223,7 @@ Controlled by git:
 
 - deal with merge conflicts: edit files
 	````sh
-	file content without merge problems.
+			file content without merge problems.
 	<<<<<<<
 	this is the local version of the file content.
 	|||||||
@@ -233,25 +233,15 @@ Controlled by git:
 	>>>>>>>
 	````
 
-### Test slide
-
-Hallo Welt
-
-
-	git add mergeFile1.txt
-	git add mergeFile2.csv
-	git commit -m "merge conflicts manually resolved"
-
-
-### 
+## 
 
 - commit final version of files as they were edited
 
-	````sh
-	git add mergeFile1.txt
-	git add mergeFile2.csv
-	git commit -m "merge conflicts manually resolved"
-	````
+	``` sh
+			git add mergeFile1.txt
+git add mergeFile2.csv
+git commit -m "merge conflicts manually resolved"
+	```
 
 . . .
 
@@ -260,7 +250,7 @@ Hallo Welt
 	git push origin master
 	````
 
-### 
+## 
 
 - merge
 - clone
@@ -268,7 +258,7 @@ Hallo Welt
 
 git remote
 
-###
+##
 
 To learn:
 - basics: add, stage, commit, pull, push
@@ -278,18 +268,18 @@ To learn:
 - pull requests
 - advanced tips: subtree, submodule (proprietary data must reside out of github)
 
-### Resources
+## Resources
 
 - git lessons at [Software Carpentry](http://swcarpentry.github.io/git-novice/)
 - [myrepos](http://myrepos.branchable.com/)
 
 
 
-### 
+## 
 
 Project dependencies: subtree / submodule
 
-###
+##
 
 git subtree
 
@@ -299,7 +289,7 @@ git subtree
 Links:
 - [atlassian blog](http://blogs.atlassian.com/2013/05/alternatives-to-git-submodule-git-subtree/)
   
-###
+##
 git submodule
 
 - sub-repository does not come with the parent repository
@@ -308,7 +298,7 @@ git submodule
   
   
 
-###
+##
 
 Alternatives:
 - subversion 
@@ -317,17 +307,17 @@ Alternatives:
 # [Markdown](http://daringfireball.net/projects/markdown/)
 
 
-### Headers
+## Headers
 
 ````
 
 # New section
 
-### New slides
+## New slides
 ````
 
 
-### Lists
+## Lists
 
 ````
 
@@ -344,7 +334,7 @@ Alternatives:
 - Gum.
 - Booze.
   
-### 
+## 
 
 ````
 
@@ -358,7 +348,7 @@ Alternatives:
 3. Blue
    
    
-### Links
+## Links
 
 ````
 
@@ -367,7 +357,7 @@ This link points to [Google](http://www.google.de).
 
 This link points to [Google](http://www.google.de).
 
-### Emphasis
+## Emphasis
 
 ````
 
@@ -383,7 +373,7 @@ This link points to [Google](http://www.google.de).
   
 # [pandoc](http://johnmacfarlane.net/pandoc/)
 
-###
+##
 
 > "If you need to convert files from one markup format into another,
 > pandoc is your swiss-army knife."
@@ -391,7 +381,7 @@ This link points to [Google](http://www.google.de).
 
 [http://johnmacfarlane.net/pandoc/](http://johnmacfarlane.net/pandoc/)
 
-### 
+## 
 
 What for?
 
@@ -399,7 +389,7 @@ What for?
 - multiple output formats for single content file
   
   
-###
+##
 
 Starting small
 
@@ -411,7 +401,7 @@ Starting small
 pandoc -t revealjs -f markdown \
 -o output/content.slides.html src/content.md
 ````
-###
+##
 
 Add `-s` option for standalone html file:
 
@@ -421,7 +411,7 @@ pandoc -s -t revealjs -f markdown \
 -o output/content.slides.html src/content.md
 ````
 
-###
+##
 
 - inspect html source in browser: `Inspect element`
 - adapt reveal.js path variable
@@ -432,7 +422,7 @@ pandoc -s -V revealjs-url=../reveal.js -t revealjs \
 -f markdown -o output/content.slides.html src/content.md
 ````
 
-###
+##
 
 - currently some files paths are out of sync between latest reveal.js
   version and pandoc version
@@ -447,7 +437,7 @@ cd ../css
 ln -s reveal.css reveal.min.css 
 ````
 
-### [MathJax](http://www.mathjax.org/)
+## [MathJax](http://www.mathjax.org/)
 
 - including mathematical formulas:
   
@@ -460,7 +450,7 @@ $$
 
 $\Rightarrow$ configure `MathJax` to correctly render formulas
 
-### 
+## 
 
 `pandoc` details:
 
@@ -471,7 +461,7 @@ $\Rightarrow$ configure `MathJax` to correctly render formulas
 
 [default.revealjs](https://github.com/jgm/pandoc-templates/blob/master/default.revealjs)
 
-###
+##
 
 - better solution for setting paths
 - custom pandoc [template files](https://github.com/cgroll/pandoc_custom) 
@@ -489,7 +479,7 @@ $\Rightarrow$ configure `MathJax` to correctly render formulas
 	https://github.com/cgroll/pandoc_custom.git master --squash
 	````
   
-### 
+## 
 
 - example MathJax code in template:
   
@@ -509,7 +499,7 @@ tex2jax: {inlineMath: [["$$","$$"],["\\(","\\)"]]}});
 $\Rightarrow$ set MathJax path according to your needs!
 
 
-### 
+## 
 
 - link to template file in pandoc command
   
@@ -520,7 +510,7 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 -f markdown -o output/content.slides.html src/content.md
 ````
 
-###
+##
 
 MathJax rendered
 
@@ -532,7 +522,7 @@ $$\alpha^{2} = \beta^{2}$$
 
 $$\alpha^{2} = \beta^{2}$$
 
-###
+##
 
 - using latex equation environment currently requires different syntax
   for `html` and `pdf` output
@@ -547,7 +537,7 @@ $$\alpha^{2} = \beta^{2}$$
 	\end{equation}$$
 	````
 
-###
+##
 
 - same formula for `pdf` output:
 
@@ -559,7 +549,7 @@ $$\alpha^{2} = \beta^{2}$$
 	\end{equation}
 	````
 
-### 
+## 
 
 - both options are parsed differently 
 - to get parsed contents, export to `native` format
@@ -569,7 +559,7 @@ $$\alpha^{2} = \beta^{2}$$
 pandoc -t native src/content.md -o output/content_native.txt
 ````
 
-###
+##
 
 - the equations will appear as
 
@@ -580,7 +570,7 @@ pandoc -t native src/content.md -o output/content_native.txt
 ````
 $\Rightarrow$ using an appropriate `--filter` option might solve the problem
 
-### 
+## 
 
 - especially for latex, errors can be hard to find
 - it might help to look at the raw produced `tex` file
@@ -590,7 +580,7 @@ $\Rightarrow$ using an appropriate `--filter` option might solve the problem
 pandoc -t latex -f markdown -s -o output/content.tex
 ````
 
-###
+##
 
 - labeled and numbered equation:
 
@@ -599,7 +589,7 @@ $$\begin{equation}
 \label{eq:sample}
 \end{equation}$$
 
-###
+##
 
 - labeled aligned equations, single number:
   
@@ -623,7 +613,7 @@ $$\begin{equation}
 \label{eq:splitSample}
 \end{equation}$$
 
-### 
+## 
 
 - aligned equations, one number per line, single label
   
@@ -645,7 +635,7 @@ $$\begin{align}
 
 
 
-###
+##
 
 - referring to equations in text
   
@@ -659,7 +649,7 @@ Referring to equations $\eqref{eq:sample}$, $\eqref{eq:splitSample}$
 and $\eqref{eq:alignedSample}$.
 
 
-### Citations
+## Citations
 
 -
  [pandoc-citeproc](http://hackage.haskell.org/package/pandoc-citeproc):
@@ -668,7 +658,7 @@ and $\eqref{eq:alignedSample}$.
 > variety of styles using a macro language called Citation Style
 > Language (CSL)"
 
-###
+##
 
 - Linux installation:
   
@@ -677,7 +667,7 @@ and $\eqref{eq:alignedSample}$.
 sudo apt-get install pandoc-citeproc
 ````
 
-###
+##
 
 - keep list of references in bibtex format
   
@@ -698,7 +688,7 @@ year = {2002}
 }
 ````
 
-###
+##
 
 - meanwhile bibtex entries for most references are readily available
 - simply google for reference + bibtex
@@ -706,12 +696,12 @@ year = {2002}
   [page](http://www.citeulike.org/user/felixroudier/author/Rubinstein) 
   
   
-### [Citation Style Language](http://citationstyles.org/)
+## [Citation Style Language](http://citationstyles.org/)
 
 - define style of references and bibliography in *.csl* file
 - [search citation styles](http://editor.citationstyles.org/about/)
   
-### 
+## 
 
 - pre-process citations in pandoc
   
@@ -724,7 +714,7 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 -o output/content.slides.html src/content.md
 ````
 
-### 
+## 
 
 - cite reference
   
@@ -736,7 +726,7 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
   
 - references will appear automatically in bibliography at the end
   
-### 
+## 
 
 Internal links
 
@@ -749,13 +739,13 @@ Still remember [the git introduction](#git)?
 
 Still remember [the git introduction](#git)?
 
-### Resources
+## Resources
 
 - [John MacFarlane, slides](http://johnmacfarlane.net/BayHac2014/#/)
 - [John MacFarlane, video](https://youtu.be/6TBpB-BEiIg)
 
 
-### Pandoc alternatives
+## Pandoc alternatives
 
 you could also circumvent raw LaTeX with:
 
@@ -764,12 +754,12 @@ you could also circumvent raw LaTeX with:
   
 # [Make](http://www.gnu.org/software/make/)
 
-### Automation
+## Automation
 
 - using command line allows for easy automation of repetitive tasks
 - GUIs and mouse clicks are a lot less easy to automate
   
-###
+##
 
 Starting small
 
@@ -790,7 +780,7 @@ Starting small
 	sh export.sh   
 	````
    
-###
+##
 
 Improvements:
 
@@ -799,7 +789,7 @@ Improvements:
 
 $\Rightarrow$ use a `Makefile`
 
-### 
+## 
 
 - set target files with dependencies
 - conditional execution: command is executed, if:
@@ -807,7 +797,7 @@ $\Rightarrow$ use a `Makefile`
   - last modification of dependency is more recent than last
     modification of target file
 
-###
+##
 
 - create `Makefile`
 - `Make` syntax:
@@ -819,7 +809,7 @@ $\Rightarrow$ use a `Makefile`
 
 - important: line with target rule MUST start with TAB
 
-### Usecase: pandoc slide creation
+## Usecase: pandoc slide creation
 
 ````make
 output/content.slides.html: src/content.md Makefile refs.bib
@@ -830,7 +820,7 @@ output/content.slides.html: src/content.md Makefile refs.bib
 	-o output/content.slides.html src/content.md
 ````
 
-### 
+## 
 
 - you can build individual targets by calling `Make` on them:
 
@@ -843,7 +833,7 @@ output/content.slides.html: src/content.md Makefile refs.bib
   target appearing in a `Makefile`
 
 
-###
+##
 
 - adding an additional output target
 
@@ -853,13 +843,13 @@ output/content.slides.html: src/content.md Makefile refs.bib
 ````
 
 
-###
+##
 
 dummy targets:
 
 - use dummy targets to subsume multiple targets
 
-### Additional resources
+## Additional resources
 
 - Make lessons at [Software Carpentry](http://software-carpentry.org/v4/make/index.html)
 
@@ -867,17 +857,17 @@ dummy targets:
 
 # [Julia](http://julialang.org/)
 
-###
+##
 - IJulia
 - notebook files
   
 # Notebook environments
 
-###
+##
 - [beaker notebook](http://beakernotebook.com/)
 - [Jupyter](http://jupyter.org/)
   
   
-### References
+## References
 
 
