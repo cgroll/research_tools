@@ -9,19 +9,11 @@
 
 - git was created to improve cooperative work on the Linux kernel:
 
-<<<<<<< Updated upstream
 > "Git is a free and open source distributed version control system
 > designed to handle everything from small to very large projects with
 > speed and efficiency."
 
 ### Why git?
-=======
-- git was created to improve cooperative work on the Linux kernel
-
-- [myrepos](http://myrepos.branchable.com/)
-  
-## Why
->>>>>>> Stashed changes
 
 - robust cooperation
 
@@ -31,12 +23,8 @@
 
 . . .
 
-<<<<<<< Updated upstream
 - history: restore past project state
 	- allows experimentation with software
-=======
-- history: allow experimentation with software
->>>>>>> Stashed changes
 	- source files often need to be saved in order to run their newest
      version 
 	- if modifications are experimental and probably only temporary,
@@ -48,7 +36,6 @@
 - more generally: keep multiple versions of file (stable / development
   version)
 
-<<<<<<< Updated upstream
 ### [github](www.github.com)
 
 - free code hosting platform in perfect alignment with git
@@ -64,9 +51,6 @@
 	- free static homepages (gh-pages)
 
 ## Installation / configuration
-=======
-## Installation
->>>>>>> Stashed changes
 
 ### Setup targets
 
