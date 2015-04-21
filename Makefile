@@ -12,7 +12,12 @@ all: $(OUT)
 
 $(OUTDIR)/content.slides.html: src/content.md Makefile refs.bib
 	pandoc --template=$(TMPL) \
+	-V slideNumber=true \
+	--slide-level=3 --toc --toc-depth=1 \
+	--filter pandoc_custom/filters/adaptHeaders.hs \
+	--filter pandoc_custom/filters/amsmath.hs \
 	-s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+	--include-in-header=pandoc_custom/css/reveal_left_strong.css \
 	--filter pandoc-citeproc --csl=$(CSL) \
 	--bibliography=refs.bib \
 	-o output/content.slides.html src/content.md
