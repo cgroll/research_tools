@@ -15,15 +15,15 @@
 
 ## Why git?
 
-- robust cooperation
+- robust **cooperation**
 
 . . .
 
-- robust synchronization across multiple computers
+- robust **synchronization** across multiple computers
 
 . . .
 
-- history: restore past project state
+- commit history: **restore past** project state
 	- allows experimentation with software
 	- source files often need to be saved in order to run their newest
      version 
@@ -33,22 +33,21 @@
 
 . . .
 
-- more generally: keep multiple versions of file (stable / development
-  version)
+- more generally: keep **multiple versions** of project (stable /
+  development version)
 
 ## [github](www.github.com)
 
-- free code hosting platform in perfect alignment with git
-  repositories
+- free code hosting platform for git repositories
 
 . . .
 
-- extensive features:
+- extensive **features**:
 	- issue tracking
 	- markdown rendering, comment features
 	- Wiki
-	- automatic testing
-	- free static homepages (gh-pages)
+	- automatic testing ([travis-ci](https://travis-ci.com/))
+	- free static homepages ([gh-pages](https://pages.github.com/))
 
 ## Installation / configuration
 
@@ -92,9 +91,9 @@ git config --global user.email "groll.christian.edu@gmail.com"
 
 ## On Windows machine
 
-- easiest way to install git: [github for
+- easiest way to install git: using [github for
   windows](https://windows.github.com/) (see [installation
-  screencast](https://youtu.be/utYrgFLKFaY)) 
+  screencast](https://youtu.be/utYrgFLKFaY))
 
 . . .
 
@@ -135,14 +134,14 @@ Controlled by git:
 
 . . .
 
-- current version is part of the repository
+- current version is already part of the repository (**committed**)
 
 . . .
 
 - modified files:
 
 	- either: modifications are not yet known by git
-	- or: modifications are already staged
+	- or: modifications are already **staged**
 
 . . .
 
@@ -162,28 +161,28 @@ Controlled by git:
 
 . . .
 
-- `git add` adds new files or changes to the staging area
+- `git add` **adds** new files or changes **to staging area**
 
 . . .
 
-- staging area allows grouping of changes into meaningful chunks
-  (commit): for example, all changes related to the creation of a
+- staging area allows **grouping of changes** into meaningful chunks
+  (**commit**): for example, all changes related to the creation of a
   certain graphic
 
 ## commits
 
-- a commit is a group of changes (difference between states of
-  project)
+- a **commit** is a group of **changes**, together with a reference to
+  the last commit (**difference between states** of project)
 
 . . .
 
-- the history of a repository is a sum of successive changes expressed
-  through commits
+- the **history** of a repository is a sum of **successive** changes
+  expressed through **commits**
 
 . . .
 
-- in combination with all previous commits, a single commit can also
-  be interpreted as a full snapshot of the project
+- in combination with all previous commits, a single **commit** can
+  also be interpreted as a **full snapshot** of the project
 
 . . .
 
@@ -192,13 +191,120 @@ Controlled by git:
 
 ## remotes
 
+## 
+
+using git for backup, synchronization or cooperation:
+
+- multiple copies of a repository
+
+. . .
+
+- in principle, git is **decentralized**: no copy of the repo is
+  special
+
+. . .
+
+- in order to pull from / push to other repository, both copies need
+  to be connected
+
+. . .
+
+- usually: server or code hosting platform is the only copy of the
+  repo that is always available $\Rightarrow$ it naturally becomes
+  central main repo
+
+## platforms
+
+a number of git **hosting platforms**:
+
+- [github](https://github.com/): free public repos
+- [gitlab](https://about.gitlab.com/): free private repos
+- [bitbucket](https://bitbucket.org/): free private repos
+
+## clone
+
+Copying an existing repository **from github**:
+
+. . .
+
+- https:
+
+	````sh
+	git clone https://github.com/cgroll/research_tools.git
+	````
+
+. . .
+
+- ssh:
+	````sh
+	git clone git@github.com:cgroll/research_tools.git
+	````
+
+##
+
+- to be able to synchronize with second copy of a repository you need
+  its location
+
+. . .
+
+- instead of referencing copies with complicated urls, you can assign
+  names 
+
+. . .
+
+- using `git clone` the original repository automatically gets the
+  name `origin`
+
+## storage
+
+git **forgets nothing**:
+
+. . .
+
+- all committed versions will be stored inside the repository forever
+
+. . .
+
+- git uses data blobs to efficiently store **incremental** chunks
+
+. . .
+
+- efficient incremental storage only works for text files: a small
+  change to a **binary file** will require git to store **two full
+  versions** of the file
+
+## github: storage
+
+- github will store a repository with its full history
+
+. . .
+
+- using free **public** repositories:
+	- do not commit **proprietary data** that you are not allowed to
+     re-distribute
+	- do not commit sensible data (**passwords**, ...)
+
 ## branches
+
+- branches allow **multiple** different **versions** of project:
+  stable vs development version
+
+. . .
+
+- design of branches encourages merging:
+	- not meant for infinite second version
+	- one single final outcome: **eventually** branches should be
+     **merged to master**
+
+. . .
+
+- repos start with `master` branch by default
 
 ## workflow
 
 ## Commit own changes
 
-- add modifications to `git`:
+- **add modifications** to `git`:
 	- `git add`
 	- `git commit`
 
@@ -208,20 +314,20 @@ Controlled by git:
 
 . . .
 
-- new files may be kept outside of the repository, but cause problems
-  when merging with state of repository where files are present
+- new files may be kept outside of the repo, but cause problems when
+  merging with state of repo where files are part of repo
 
 ## get changes from remote
 
-- as all merges must occur locally, possible changes on the remote
-  need to be merged first 
+- as all merges must occur locally, possible **changes** on the remote
+  need to be **merged** first
 	````sh
 	git pull origin master
 	````
 
 . . .
 
-- deal with merge conflicts: edit files
+- deal with **merge conflicts**: edit files
 	````sh
 			file content without merge problems.
 	<<<<<<<
@@ -235,7 +341,7 @@ Controlled by git:
 
 ## 
 
-- commit final version of files as they were edited
+- **commit final version** of files as they were edited
 
 	``` sh
 			git add mergeFile1.txt
@@ -245,64 +351,242 @@ git commit -m "merge conflicts manually resolved"
 
 . . .
 
-- push final local version to remote repository
+- **push** final local version to remote repository
 	````sh
 	git push origin master
 	````
 
-## 
+## Merging from remote
 
-- merge
-- clone
-- binary data
+**pull** is shortcut for two separate steps:
 
-git remote
+. . .
 
-##
+- `git fetch`: **download** content
 
-To learn:
-- basics: add, stage, commit, pull, push
-- experimenting with git
-- branches
-- checkout
-- pull requests
-- advanced tips: subtree, submodule (proprietary data must reside out of github)
+. . .
 
-## Resources
+- `git merge`: **join** different versions
 
-- git lessons at [Software Carpentry](http://swcarpentry.github.io/git-novice/)
+## Update unclean workspace
+
+- if you need to update your repo from a remote, and do not want to
+  commit temporary modifications:
+	````
+	git stash
+	git pull origin master
+	git stash apply
+	````
+
+## New repository
+
+## set up git repo
+
+- create and edit files
+
+. . .
+
+- `git init`
+
+. . .
+
+- `git commit -m "project started"`
+
+. . .
+
+- go to code hosting platform
+
+. . .
+
+- create new empty repository
+
+. . .
+
+- copy paste code to add remote repository and push to it
+
+## add remote
+
+- you can use multiple remote locations
+
+. . .
+
+- add remote
+````
+git remote add upstream https://github.com/user/gitRepo.git
+````
+
+
+## Contributing on github
+
+- **fork repo**: own copy of repo in github
+
+. . .
+
+- **clone repo**: own local copy of repo
+
+. . .
+
+- add original repo location as **upstream** to stay up-to-date 
+
+. . .
+
+- edit and **commit**
+
+. . .
+
+- **pull** updates from original repo and **merge**
+
+. . .
+
+- **push** to own github copy 
+
+. . .
+
+- create **pull request**
+
+## Commit history
+
+## Hash keys
+
+- each commit has a unique **hash** key, for example:
+  *8b28faebc533eab693c61054d20b801f8e6245f4*
+
+. . .
+
+- this hash key can be used to refer to
+	- previous **changes**
+	- previous **repo states**
+
+
+## history
+
+- a commit contains a group of **modifications** and a **reference**
+  to a previous commit
+
+. . .
+
+- **sum of commits**: successively applying changes on top of old
+  changes **restores complete project**
+
+. . .
+
+- without referenced previous commit file changes associated with
+  commit are useless
+
+. . .
+
+$\Rightarrow$ **messing with history** could make some commits useless
+
+
+- non-linear commit history
+
+## Go back in history
+
+- **temporarily** recreate old state of repo
+	````
+	git checkout 4d3d2fd32
+	````
+
+. . .
+
+- recreating old state with **editing** enabled: create new branch at
+  old repo state
+	````
+	git checkout -b testingBranch 4d3d2fd32
+	````
+
+. . .
+
+$\Rightarrow$ **modifications** in *testingBranch* can be **merged**
+back into *master*
+
+## Go back and change history
+
+- **delete** everything up to some state in the past
+	````
+	git reset --hard 4d3d2fd32
+	````
+
+. . .
+
+- modify and commit
+
+. . .
+
+**Be careful:**
+
+If other people did build some changes on your history, you might
+delete some old commits that is required by their work.
+
+. . .
+
+$\Rightarrow$ **Never mess with publicly available history** in order to
+not break existing commit sequences.
+
+## Experimenting
+
+- create **checkpoint**: commit all modifications
+
+. . .
+
+- edit and save files, try new version
+
+. . .
+
+- if experiment fails: **discard** modifications by checking out the
+  latest commit file version
+````
+git checkout filename.txt
+````
+
+## Advanced git
+
+## git submodule
+
+- proprietary data must remain outside of repository
+
+. . .
+
+- fix state of data: in ongoing analysis, which exact data was used
+  when?
+
+. . .
+
+- keep evolving data in privately hosted repo 
+
+. . .
+
+- updating sub-directory requires manual pull for each submodule 
+
+. . .
+
+- submodule does not automatically ship with cloned repo
+
+## git subtree
+
+- example: embed re-usable libraries
+- history of subtree can be omitted
+- easy updating of external repositories
+- see [Atlassian blog](http://blogs.atlassian.com/2013/05/alternatives-to-git-submodule-git-subtree/)
+  
+## Additional software
+
 - [myrepos](http://myrepos.branchable.com/)
+- [GUI Clients](http://www.git-scm.com/downloads/guis)
+
+## Further resources
+
+- git lessons at [Software
+  Carpentry](http://swcarpentry.github.io/git-novice/)
+- [Atlassian tutorials](https://www.atlassian.com/git/tutorials/)
+- [free git book](http://www.git-scm.com/book/en/v2)
 
 
+## Alternatives
 
-## 
-
-Project dependencies: subtree / submodule
-
-##
-
-git subtree
-
-- incorporate external repositories without history
-- allow easy updating for external repositories
-  
-Links:
-- [atlassian blog](http://blogs.atlassian.com/2013/05/alternatives-to-git-submodule-git-subtree/)
-  
-##
-git submodule
-
-- sub-repository does not come with the parent repository
-  automatically
-- use for private data that may not be shared with public repository
-  
-  
-
-##
-
-Alternatives:
-- subversion 
+- [Apache Subversion](http://subversion.apache.org/)
 - [Mercurial](http://swcarpentry.github.io/hg-novice/)
+
 
 # [Markdown](http://daringfireball.net/projects/markdown/)
 
@@ -388,6 +672,10 @@ What for?
 - enable markdown usage
 - multiple output formats for single content file
   
+##
+
+- [Video: Pandoc installation, windows](https://youtu.be/N9zVyggYeyU)
+- [Video: markdown to html slides using pandoc](https://youtu.be/idD5pNAXL3s)
   
 ##
 
@@ -584,10 +872,10 @@ pandoc -t latex -f markdown -s -o output/content.tex
 
 - labeled and numbered equation:
 
-$$\begin{equation}
+\begin{equation}
 \alpha = \beta
 \label{eq:sample}
-\end{equation}$$
+\end{equation}
 
 ##
 
@@ -595,23 +883,23 @@ $$\begin{equation}
   
 ````latex
 
-$$\begin{equation}
+\begin{equation}
 \begin{split} 
 \gamma(n)&=\sum_{i=1}^{n}x^{2}\\
 &=\sum_{i=1}^{n}x\cdot x
 \end{split}
 \label{eq:splitSample}
-\end{equation}$$
+\end{equation}
 
 ````
 
-$$\begin{equation}
+\begin{equation}
 \begin{split} 
 \gamma(n)&=\sum_{i=1}^{n}x^{2}\\
 &=\sum_{i=1}^{n}x\cdot x
 \end{split}
 \label{eq:splitSample}
-\end{equation}$$
+\end{equation}
 
 ## 
 
@@ -627,11 +915,11 @@ $$\begin{align}
 ````
 
 
-$$\begin{align}
+\begin{align}
 \gamma(n)&=\sum_{i=1}^{n}x^{2}\\
 &=\sum_{i=1}^{n}x\cdot x
 \label{eq:alignedSample}
-\end{align}$$
+\end{align}
 
 
 
@@ -855,10 +1143,14 @@ dummy targets:
 
 # coding: best practices
 
+- [Programming style guidelines](https://grollchristian.wordpress.com/2013/08/16/programming-style-guidelines-r-and-matlab/)
+- [Julia style guide](http://julia.readthedocs.org/en/latest/manual/style-guide/)
+
 # [Julia](http://julialang.org/)
 
 ##
-- IJulia
+- [IJulia](https://github.com/JuliaLang/IJulia.jl)
+- [JuliaBox](https://juliabox.org/)
 - notebook files
   
 # Notebook environments
@@ -867,6 +1159,38 @@ dummy targets:
 - [beaker notebook](http://beakernotebook.com/)
 - [Jupyter](http://jupyter.org/)
   
+## R Users
+
+- [Coursera: R Programming](https://www.coursera.org/course/rprog)
+- [R Markdown](http://rmarkdown.rstudio.com/)
+- [Slidify](http://slidify.org/)
+- [RPubs](http://www.rpubs.com/)
+- [RStudio git support](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN)
+- [Presenting your findings with R](https://grollchristian.wordpress.com/2013/09/07/presentations-in-r/)
+
+## Visualization
+
+- [A layered grammar of
+  graphics](http://vita.had.co.nz/papers/layered-grammar.html) 
+
+## Data manipulation
+
+- [Tidy data](http://vita.had.co.nz/papers/tidy-data.html)
+- [The split-apply-combine strategy for data
+  analysis](http://vita.had.co.nz/papers/plyr.html)
+- [Google refine](https://code.google.com/p/google-refine/)
+
+## What others say
+
+- [Hadley Wickham](http://hadley.wickham.usesthis.com/)
+- [Kieran Healy](http://kieranhealy.org/resources/)
+- [Coursera: Reproducible Research](https://www.coursera.org/course/repdata)
+- [Gregory Wilson](http://www2.ccr.buffalo.edu/halfon/courses/Resources%20for%20Students%20and%20Postdocs/other_docs/Wilson_2006_American%20Scientist.pdf)
+
+## Miscellaneous
+
+- docker
+- aws
   
 ## References
 
