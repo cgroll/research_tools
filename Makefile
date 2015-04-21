@@ -23,11 +23,35 @@ $(OUTDIR)/content.slides.html: src/content.md Makefile refs.bib
 
 $(OUTDIR)/content.pdf: src/content.md Makefile refs.bib
 	pandoc -s -t beamer -f markdown \
+	--slide-level=2 \
+	-V theme=CambridgeUS -V colortheme=dolphin \
+	-V header-includes=\\hypersetup{colorlinks\=true} \
+	-V header-includes=\\hypersetup{urlcolor\=blue} \
+	-V header-includes=\\hypersetup{linkcolor\=blue} \
+	-V header-includes=\\usepackage{hyperref} \
+	-V urlcolor=blue \
+	-V linkcolor=blue \
 	--mathjax \
-	--filter=./pandoc_custom/filters/amsmath.hs \
+	--filter pandoc_custom/filters/skip_pause.hs \
 	--filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
 	--bibliography=refs.bib \
-	-o output/content.pdf src/content.md
+	-o $@ $<
+
+
+debug: src/content.md Makefile refs.bib
+	pandoc -s -t beamer -f markdown \
+	--slide-level=2 \
+	-V theme=Warsaw \
+	-V header-includes=\\hypersetup{colorlinks\=true} \
+	-V header-includes=\\usepackage{hyperref} \
+	-V urlcolor=blue \
+	-V linkcolor=blue \
+	--mathjax \
+	--filter pandoc_custom/filters/skip_pause.hs \
+	--filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
+	--bibliography=refs.bib \
+	-o output/content.tex $<
+
 
 publish: $(OUT) Makefile refs.bib
 	git checkout gh-pages
