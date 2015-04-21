@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+        <meta name="author" content="Christian Groll" />
+            <title>git and github</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../reveal.js/css/reveal.css"/>
+    <style type="text/css">code{white-space: pre;}</style>
+            <link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+            <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = '../reveal.js/css/print/pdf.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+    <!--[if lt IE 9]>
+        <script src="../reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+            <style type="text/css">
+    p { text-align: left; }
+    .reveal ul {
+        width: 900px;
+    }
+    
+    .reveal strong { color: lawngreen;
+                     font-style: normal;
+                     font-weight: bold;
+                   }
+    
+    /* all headers are transformed to h1 by reveal.js, */
+    /* even individual slide headers. */
+    /* hence, h1 font size should not be too large */
+    .reveal h1 { 
+        font-style: normal;
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+    
+    </style>
+        
+    <!-- include local MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+      "HTML-CSS": {
+      scale: 80,
+      },
+      extensions: ["tex2jax.js"],
+      TeX: { equationNumbers: { autoNumber: "AMS" } },
+      jax: ["input/TeX","output/HTML-CSS"],
+      tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}});
+    </script>
+    <script type="text/javascript" src="../MathJax/MathJax.js"></script>
+    
+  </head>
+  <body>
+        <div class="reveal">
+      <div class="slides">
+        
+                <section>
+          <h1 class="title"><a href="http://www.git-scm.com/">git</a> and <a href="www.github.com">github</a></h1>
+                              <h2 class="author">Christian Groll</h2>
+                    <h3 class="date"></h3>
+        </section>
+                        
+        <section><section id="overview" class="titleslide slide level1"><h1>Overview</h1></section><section id="origin" class="slide level2">
+        <h1>origin</h1>
+        <ul>
+        <li>git was created to improve cooperative work on the Linux kernel:</li>
+        </ul>
+        <blockquote>
+        <p>&quot;Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.&quot;</p>
+        </blockquote>
+        </section><section id="why-git" class="slide level2">
+        <h1>Why git?</h1>
+        <ul>
+        <li>robust <strong>cooperation</strong></li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>robust <strong>synchronization</strong> across multiple computers</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>commit history: <strong>restore past</strong> project state
+        <ul>
+        <li>allows experimentation with software</li>
+        <li>source files often need to be saved in order to run their newest version</li>
+        <li>if modifications are experimental and probably only temporary, the original stable version should exist as a checkpoint to return to</li>
+        </ul></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>more generally: keep <strong>multiple versions</strong> of project (stable / development version)</li>
+        </ul>
+        </div>
+        </section><section id="github" class="slide level2">
+        <h1><a href="www.github.com">github</a></h1>
+        <ul>
+        <li>free code hosting platform for git repositories</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>extensive <strong>features</strong>:
+        <ul>
+        <li>issue tracking</li>
+        <li>markdown rendering, comment features</li>
+        <li>Wiki</li>
+        <li>automatic testing (<a href="https://travis-ci.com/">travis-ci</a>)</li>
+        <li>free static homepages (<a href="https://pages.github.com/">gh-pages</a>)</li>
+        </ul></li>
+        </ul>
+        </div>
+        </section></section>
+        <section><section id="installation-configuration" class="titleslide slide level1"><h1>Installation / configuration</h1></section><section id="setup-targets" class="slide level2">
+        <h1>Setup targets</h1>
+        <ul>
+        <li>install and configure git</li>
+        <li>register at github</li>
+        <li>enable ssh access to github</li>
+        </ul>
+        </section><section id="on-linux-machine" class="slide level2">
+        <h1>On Linux machine</h1>
+        <ul>
+        <li>git is usually installed upfront</li>
+        <li><p>otherwise: use package manager (for example on Ubuntu)</p>
+        <pre class="sh"><code>sudo apt-get install git</code></pre></li>
+        </ul>
+        </section><section id="git-config" class="slide level2">
+        <h1><a href="https://help.github.com/articles/set-up-git/">git config</a></h1>
+        <p>associate yourself with your work:</p>
+        <div class="fragment">
+        <ul>
+        <li><p>user name:</p>
+        <pre class="sh"><code>git config --global user.name &quot;cgroll&quot;</code></pre></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li><p>email address:</p>
+        <pre class="sh"><code>git config --global user.email &quot;groll.christian.edu@gmail.com&quot;</code></pre></li>
+        </ul>
+        </div>
+        </section><section id="github-setup" class="slide level2">
+        <h1>github setup</h1>
+        <ul>
+        <li>register at github</li>
+        <li><a href="https://help.github.com/articles/generating-ssh-keys/">set up SSH keys</a></li>
+        </ul>
+        </section><section id="on-windows-machine" class="slide level2">
+        <h1>On Windows machine</h1>
+        <ul>
+        <li>easiest way to install git: using <a href="https://windows.github.com/">github for windows</a> (see <a href="https://youtu.be/utYrgFLKFaY">installation screencast</a>)</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>installation will automatically exchange SSH keys</li>
+        </ul>
+        </div>
+        </section></section>
+        <section><section id="terminology" class="titleslide slide level1"><h1>Terminology</h1></section><section id="repository-vs-folder" class="slide level2">
+        <h1>Repository vs folder</h1>
+        <ul>
+        <li>a git project is called repository</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>a repository resides in a folder</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>files within this folder are not automatically under control of git</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>for all files within the repository git contains the current version and all past versions</li>
+        </ul>
+        </div>
+        </section><section id="section" class="slide level2">
+        <h1></h1>
+        <p>Files basically can be in one of the following states:</p>
+        <div class="fragment">
+        <ul>
+        <li>NOT controlled by git:
+        <ul>
+        <li>either: files are visible in git</li>
+        <li>or: files can be ignored by <code>gitignore</code></li>
+        </ul></li>
+        </ul>
+        </div>
+        </section><section id="section-1" class="slide level2">
+        <h1></h1>
+        <p>Controlled by git:</p>
+        <div class="fragment">
+        <ul>
+        <li>current version is already part of the repository (<strong>committed</strong>)</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li><p>modified files:</p>
+        <ul>
+        <li>either: modifications are not yet known by git</li>
+        <li>or: modifications are already <strong>staged</strong></li>
+        </ul></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li><p>overview command:</p>
+        <pre class="sh"><code>git status</code></pre></li>
+        </ul>
+        </div>
+        </section><section id="section-2" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li><p>files and changes need to be added to git:</p>
+        <pre class="sh"><code>git add someFile.txt</code></pre></li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li><code>git add</code> <strong>adds</strong> new files or changes <strong>to staging area</strong></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>staging area allows <strong>grouping of changes</strong> into meaningful chunks (<strong>commit</strong>): for example, all changes related to the creation of a certain graphic</li>
+        </ul>
+        </div>
+        </section><section id="commits" class="slide level2">
+        <h1>commits</h1>
+        <ul>
+        <li>a <strong>commit</strong> is a group of <strong>changes</strong>, together with a reference to the last commit (<strong>difference between states</strong> of project)</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>the <strong>history</strong> of a repository is a sum of <strong>successive</strong> changes expressed through <strong>commits</strong></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>in combination with all previous commits, a single <strong>commit</strong> can also be interpreted as a <strong>full snapshot</strong> of the project</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>the project snapshot only exists for those files in the folder that are put under git's control</li>
+        </ul>
+        </div>
+        </section></section>
+        <section><section id="remotes" class="titleslide slide level1"><h1>Remotes</h1></section><section id="section-3" class="slide level2">
+        <h1></h1>
+        <p>using git for backup, synchronization or cooperation:</p>
+        <ul>
+        <li>multiple copies of a repository</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>in principle, git is <strong>decentralized</strong>: no copy of the repo is special</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>in order to pull from / push to other repository, both copies need to be connected</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>usually: server or code hosting platform is the only copy of the repo that is always available <span class="math"> ⇒ </span> it naturally becomes central main repo</li>
+        </ul>
+        </div>
+        </section><section id="platforms" class="slide level2">
+        <h1>platforms</h1>
+        <p>a number of git <strong>hosting platforms</strong>:</p>
+        <ul>
+        <li><a href="https://github.com/">github</a>: free public repos</li>
+        <li><a href="https://about.gitlab.com/">gitlab</a>: free private repos</li>
+        <li><a href="https://bitbucket.org/">bitbucket</a>: free private repos</li>
+        </ul>
+        </section><section id="clone" class="slide level2">
+        <h1>clone</h1>
+        <p>Copying an existing repository <strong>from github</strong>:</p>
+        <div class="fragment">
+        <ul>
+        <li><p>https:</p>
+        <pre class="sh"><code>git clone https://github.com/cgroll/research_tools.git</code></pre></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li><p>ssh:</p>
+        <pre class="sh"><code>git clone git@github.com:cgroll/research_tools.git</code></pre></li>
+        </ul>
+        </div>
+        </section><section id="section-4" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>to be able to synchronize with second copy of a repository you need its location</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>instead of referencing copies with complicated urls, you can assign names</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>using <code>git clone</code> the original repository automatically gets the name <code>origin</code></li>
+        </ul>
+        </div>
+        </section><section id="storage" class="slide level2">
+        <h1>storage</h1>
+        <p>git <strong>forgets nothing</strong>:</p>
+        <div class="fragment">
+        <ul>
+        <li>all committed versions will be stored inside the repository forever</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>git uses data blobs to efficiently store <strong>incremental</strong> chunks</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>efficient incremental storage only works for text files: a small change to a <strong>binary file</strong> will require git to store <strong>two full versions</strong> of the file</li>
+        </ul>
+        </div>
+        </section><section id="github-storage" class="slide level2">
+        <h1>github: storage</h1>
+        <ul>
+        <li>github will store a repository with its full history</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>using free <strong>public</strong> repositories:
+        <ul>
+        <li>do not commit <strong>proprietary data</strong> that you are not allowed to re-distribute</li>
+        <li>do not commit sensible data (<strong>passwords</strong>, ...)</li>
+        </ul></li>
+        </ul>
+        </div>
+        </section><section id="branches" class="slide level2">
+        <h1>branches</h1>
+        <ul>
+        <li>branches allow <strong>multiple</strong> different <strong>versions</strong> of project: stable vs development version</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>design of branches encourages merging:
+        <ul>
+        <li>not meant for infinite second version</li>
+        <li>one single final outcome: <strong>eventually</strong> branches should be <strong>merged to master</strong></li>
+        </ul></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>repos start with <code>master</code> branch by default</li>
+        </ul>
+        </div>
+        </section></section>
+        <section><section id="workflow" class="titleslide slide level1"><h1>Workflow</h1></section><section id="commit-own-changes" class="slide level2">
+        <h1>Commit own changes</h1>
+        <ul>
+        <li><strong>add modifications</strong> to <code>git</code>:
+        <ul>
+        <li><code>git add</code></li>
+        <li><code>git commit</code></li>
+        </ul></li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>modifications to files under control of git MUST be added</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>new files may be kept outside of the repo, but cause problems when merging with state of repo where files are part of repo</li>
+        </ul>
+        </div>
+        </section><section id="get-changes-from-remote" class="slide level2">
+        <h1>get changes from remote</h1>
+        <ul>
+        <li><p>as all merges must occur locally, possible <strong>changes</strong> on the remote need to be <strong>merged</strong> first</p>
+        <pre class="sh"><code>git pull origin master</code></pre></li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li><p>deal with <strong>merge conflicts</strong>: edit files</p>
+        <pre class="sh"><code>        file content without merge problems.
+        &lt;&lt;&lt;&lt;&lt;&lt;&lt;
+        this is the local version of the file content.
+        |||||||
+        this is the version of the common ancestor.
+        =======
+        this is the version of the remote commit.
+        &gt;&gt;&gt;&gt;&gt;&gt;&gt;</code></pre></li>
+        </ul>
+        </div>
+        </section><section id="section-5" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li><p><strong>commit final version</strong> of files as they were edited</p>
+        <pre class="sh"><code>        git add mergeFile1.txt
+        git add mergeFile2.csv
+        git commit -m &quot;merge conflicts manually resolved&quot;</code></pre></li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li><p><strong>push</strong> final local version to remote repository</p>
+        <pre class="sh"><code>git push origin master</code></pre></li>
+        </ul>
+        </div>
+        </section><section id="merging-from-remote" class="slide level2">
+        <h1>Merging from remote</h1>
+        <p><strong>pull</strong> is shortcut for two separate steps:</p>
+        <div class="fragment">
+        <ul>
+        <li><code>git fetch</code>: <strong>download</strong> content</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li><code>git merge</code>: <strong>join</strong> different versions</li>
+        </ul>
+        </div>
+        </section><section id="update-unclean-workspace" class="slide level2">
+        <h1>Update unclean workspace</h1>
+        <ul>
+        <li><p>if you need to update your repo from a remote, and do not want to commit temporary modifications:</p>
+        <pre><code>git stash
+        git pull origin master
+        git stash apply</code></pre></li>
+        </ul>
+        </section></section>
+        <section><section id="new-repository" class="titleslide slide level1"><h1>New repository</h1></section><section id="set-up-git-repo" class="slide level2">
+        <h1>set up git repo</h1>
+        <ul>
+        <li>create and edit files</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li><code>git init</code></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li><code>git commit -m &quot;project started&quot;</code></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>go to code hosting platform</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>create new empty repository</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>copy paste code to add remote repository and push to it</li>
+        </ul>
+        </div>
+        </section><section id="add-remote" class="slide level2">
+        <h1>add remote</h1>
+        <ul>
+        <li>you can use multiple remote locations</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li><p>add remote</p>
+        <pre><code>git remote add upstream https://github.com/user/gitRepo.git</code></pre></li>
+        </ul>
+        </div>
+        </section><section id="contributing-on-github" class="slide level2">
+        <h1>Contributing on github</h1>
+        <ul>
+        <li><strong>fork repo</strong>: own copy of repo in github</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li><strong>clone repo</strong>: own local copy of repo</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>add original repo location as <strong>upstream</strong> to stay up-to-date</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>edit and <strong>commit</strong></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li><strong>pull</strong> updates from original repo and <strong>merge</strong></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li><strong>push</strong> to own github copy</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>create <strong>pull request</strong></li>
+        </ul>
+        </div>
+        </section></section>
+        <section><section id="commit-history" class="titleslide slide level1"><h1>Commit history</h1></section><section id="hash-keys" class="slide level2">
+        <h1>Hash keys</h1>
+        <ul>
+        <li>each commit has a unique <strong>hash</strong> key, for example: <em>8b28faebc533eab693c61054d20b801f8e6245f4</em></li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>this hash key can be used to refer to
+        <ul>
+        <li>previous <strong>changes</strong></li>
+        <li>previous <strong>repo states</strong></li>
+        </ul></li>
+        </ul>
+        </div>
+        </section><section id="history" class="slide level2">
+        <h1>history</h1>
+        <ul>
+        <li>a commit contains a group of <strong>modifications</strong> and a <strong>reference</strong> to a previous commit</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li><strong>sum of commits</strong>: successively applying changes on top of old changes <strong>restores complete project</strong></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>without referenced previous commit file changes associated with commit are useless</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <p><span class="math"> ⇒ </span> <strong>messing with history</strong> could make some commits useless</p>
+        <ul>
+        <li>non-linear commit history</li>
+        </ul>
+        </div>
+        </section><section id="go-back-in-history" class="slide level2">
+        <h1>Go back in history</h1>
+        <ul>
+        <li><p><strong>temporarily</strong> recreate old state of repo</p>
+        <pre><code>git checkout 4d3d2fd32</code></pre></li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li><p>recreating old state with <strong>editing</strong> enabled: create new branch at old repo state</p>
+        <pre><code>git checkout -b testingBranch 4d3d2fd32</code></pre></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <p><span class="math"> ⇒ </span> <strong>modifications</strong> in <em>testingBranch</em> can be <strong>merged</strong> back into <em>master</em></p>
+        </div>
+        </section><section id="go-back-and-change-history" class="slide level2">
+        <h1>Go back and change history</h1>
+        <ul>
+        <li><p><strong>delete</strong> everything up to some state in the past</p>
+        <pre><code>git reset --hard 4d3d2fd32</code></pre></li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>modify and commit</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <p><strong>Be careful:</strong></p>
+        <p>If other people did build some changes on your history, you might delete some old commits that is required by their work.</p>
+        </div>
+        <div class="fragment">
+        <p><span class="math"> ⇒ </span> <strong>Never mess with publicly available history</strong> in order to not break existing commit sequences.</p>
+        </div>
+        </section><section id="experimenting" class="slide level2">
+        <h1>Experimenting</h1>
+        <ul>
+        <li>create <strong>checkpoint</strong>: commit all modifications</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>edit and save files, try new version</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li><p>if experiment fails: <strong>discard</strong> modifications by checking out the latest commit file version</p>
+        <pre><code>git checkout filename.txt</code></pre></li>
+        </ul>
+        </div>
+        </section></section>
+        <section><section id="advanced-git" class="titleslide slide level1"><h1>Advanced git</h1></section><section id="git-submodule" class="slide level2">
+        <h1>git submodule</h1>
+        <ul>
+        <li>proprietary data must remain outside of repository</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>fix state of data: in ongoing analysis, which exact data was used when?</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>keep evolving data in privately hosted repo</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>updating sub-directory requires manual pull for each submodule</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>submodule does not automatically ship with cloned repo</li>
+        </ul>
+        </div>
+        </section><section id="git-subtree" class="slide level2">
+        <h1>git subtree</h1>
+        <ul>
+        <li>example: embed re-usable libraries</li>
+        <li>history of subtree can be omitted</li>
+        <li>easy updating of external repositories</li>
+        <li>see <a href="http://blogs.atlassian.com/2013/05/alternatives-to-git-submodule-git-subtree/">Atlassian blog</a></li>
+        </ul>
+        </section></section>
+        <section><section id="miscellaneous" class="titleslide slide level1"><h1>Miscellaneous</h1></section><section id="additional-software" class="slide level2">
+        <h1>Additional software</h1>
+        <ul>
+        <li><a href="http://myrepos.branchable.com/">myrepos</a></li>
+        <li><a href="http://www.git-scm.com/downloads/guis">GUI Clients</a></li>
+        </ul>
+        </section><section id="further-resources" class="slide level2">
+        <h1>Further resources</h1>
+        <ul>
+        <li>git lessons at <a href="http://swcarpentry.github.io/git-novice/">Software Carpentry</a></li>
+        <li><a href="https://www.atlassian.com/git/tutorials/">Atlassian tutorials</a></li>
+        <li><a href="http://www.git-scm.com/book/en/v2">free git book</a></li>
+        </ul>
+        </section><section id="alternatives" class="slide level2">
+        <h1>Alternatives</h1>
+        <ul>
+        <li><a href="http://subversion.apache.org/">Apache Subversion</a></li>
+        <li><a href="http://swcarpentry.github.io/hg-novice/">Mercurial</a></li>
+        </ul>
+        </section></section>
+      </div>
+    </div>
+    
+    
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+    
+    <script>
+      
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+      controls: true,         // Display controls in the bottom right corner
+      progress: true,         // Display a presentation progress bar
+      history: true,          // Push each slide change to the browser history
+      center: true,                       // Vertical centering of slides
+      maxScale: 1.5,                  // Bounds for smallest/largest possible content scale
+      slideNumber: true,                // Display the page number of the current slide
+      theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+      transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+      
+      // Optional libraries used to extend on reveal.js
+      dependencies: [
+      { src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      { src: '../reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+      //          { src: '../reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+      //          { src: '../reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+      ]});
+    </script>
+      </body>
+</html>
