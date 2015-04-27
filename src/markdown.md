@@ -66,6 +66,27 @@ This link points to [Google](http://www.google.de).
 - *single asterisks*
 - **double asterisks**
   
+
+## Code blocks
+
+- indicated by **backticks** or **indentation**
+
+. . .
+
+
+			````
+	function addTwo(x)
+		return x+2
+	end
+	````
+
+````
+		function addTwo(x)
+	return x+2
+end
+````
+
+
   
 # [pandoc](http://johnmacfarlane.net/pandoc/)
 
@@ -209,11 +230,11 @@ Better solution for setting paths:
 
 ##
 
-- set reveal.js path in template according to your needs
+- set reveal.js **path** in **template** according to your needs
 
 . . .
 
-- use customized pandoc settings during call
+- **point to** customized pandoc settings during call
 
 ````
       pandoc --template=pandoc_custom/templates/revealjs.template \
@@ -247,7 +268,7 @@ $\Rightarrow$ configure `MathJax` to correctly render formulas
   
 ## 
 
-- include MathJax code in template:
+- include **MathJax** code in reveal.js **template**:
   
 ````
 	    <!-- include local MathJax -->
@@ -297,6 +318,8 @@ $$\alpha^{2} = \beta^{2}$$
 	\end{equation}$$
 	````
 
+. . .
+
 
 - same formula for **pdf** output:
 
@@ -334,12 +357,17 @@ pandoc -t native src/content.md -o output/content_native.txt
 . . .
 
 
-$\Rightarrow$ using **--filter** option allows **pre-processing** of
-the parsed document
+- using **--filter** option allows **pre-processing** of the parsed
+  document 
+
+. . .
+
+$\Rightarrow$ **convert** RawBlock to Math DisplayMath for **html**
+output
 
 ## 
 
-- using **amsmath.hs** filter to allow raw latex syntax for html also
+- **amsmath.hs** filter allows raw latex syntax for html
 
 ````
       pandoc --template=pandoc_custom/templates/revealjs.template \
@@ -347,6 +375,10 @@ the parsed document
 --filter pandoc_custom/filters/amsmath.hs \
 -o output/content.slides.html src/content.md
 ````
+
+. . .
+
+$\Rightarrow$ writing equations without $$
 
 ##
 
@@ -413,7 +445,7 @@ the parsed document
 
 ##
 
-- referring to equations in text
+- **referring** to equations in text
   
 ````
 
@@ -437,7 +469,9 @@ and $\eqref{eq:alignedSample}$.
 pandoc -t latex -f markdown -s -o output/content.tex
 ````
 
+## TODO
 
+Theorem environments: [AphoFilters](https://github.com/aphorisme/AphoFilters/blob/master/src/Text/Pandoc/AphoFilters/MathThm.hs)
 
 # Citations: CSL
 ##
@@ -451,7 +485,7 @@ pandoc -t latex -f markdown -s -o output/content.tex
 
 ##
 
-- Linux installation:
+- Linux **installation**, if not already included by pandoc:
   
 ````sh
 
@@ -460,7 +494,7 @@ sudo apt-get install pandoc-citeproc
 
 ##
 
-- keep list of references in bibtex format
+- keep list of references in **bibtex** format
   
 ````
 @article{citeulike:1232469,
@@ -489,21 +523,21 @@ year = {2002}
 
 . . .
 
-- export bibtex from
+- **export bibtex** from
   [page](http://www.citeulike.org/user/felixroudier/author/Rubinstein) 
   
   
 ## [Citation Style Language](http://citationstyles.org/)
 
-- define style of references and bibliography in *.csl* file
+- define **style** of references and bibliography in **.csl** file
 
 . . .
 
-- [search citation styles](http://editor.citationstyles.org/about/)
+- find appropriate style: [search citation styles](http://editor.citationstyles.org/about/)
   
 ## 
 
-- pre-process citations in pandoc
+- **pre-process** citations through **filter**
   
 ````
 
@@ -530,9 +564,7 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
   
 - references will appear automatically in bibliography at the end
   
-## 
-
-Internal links
+## Internal links
 
 - link to section
   
@@ -541,7 +573,9 @@ Internal links
 Still remember [the pandoc introduction](#pandoc)?
 ````
 
-Still remember [the pandoc introduction](#pandoc)?
+. . .
+
+**Output**: Still remember [the pandoc introduction](#pandoc)?
 
 ## Resources
 
@@ -554,7 +588,7 @@ Still remember [the pandoc introduction](#pandoc)?
 
 ## Pandoc alternatives
 
-you could also circumvent raw LaTeX with:
+You could also circumvent raw LaTeX with:
 
 - [LyX](www.lyx.org)
 - [emacs org-mode](http://orgmode.org/)
