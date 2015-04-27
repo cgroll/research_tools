@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+        <meta name="author" content="Christian Groll" />
+            <title>markdown, pandoc and make</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../reveal.js/css/reveal.css"/>
+    <style type="text/css">code{white-space: pre;}</style>
+        <style type="text/css">
+      table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+        margin: 0; padding: 0; vertical-align: baseline; border: none; }
+      table.sourceCode { width: 100%; line-height: 100%; }
+      td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+      td.sourceCode { padding-left: 5px; }
+      code > span.kw { color: #007020; font-weight: bold; }
+      code > span.dt { color: #902000; }
+      code > span.dv { color: #40a070; }
+      code > span.bn { color: #40a070; }
+      code > span.fl { color: #40a070; }
+      code > span.ch { color: #4070a0; }
+      code > span.st { color: #4070a0; }
+      code > span.co { color: #60a0b0; font-style: italic; }
+      code > span.ot { color: #007020; }
+      code > span.al { color: #ff0000; font-weight: bold; }
+      code > span.fu { color: #06287e; }
+      code > span.er { color: #ff0000; font-weight: bold; }
+    </style>
+            <link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+            <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = '../reveal.js/css/print/pdf.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+    <!--[if lt IE 9]>
+        <script src="../reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+            <style type="text/css">
+    p { text-align: left; }
+    .reveal ul {
+        width: 900px;
+    }
+    
+    .reveal strong { color: lawngreen;
+                     font-style: normal;
+                     font-weight: bold;
+                   }
+    
+    /* all headers are transformed to h1 by reveal.js, */
+    /* even individual slide headers. */
+    /* hence, h1 font size should not be too large */
+    .reveal h1 { 
+        font-style: normal;
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+    
+    </style>
+        
+    <!-- include local MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+      "HTML-CSS": {
+      scale: 80,
+      },
+      extensions: ["tex2jax.js"],
+      TeX: { equationNumbers: { autoNumber: "AMS" } },
+      jax: ["input/TeX","output/HTML-CSS"],
+      tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}});
+    </script>
+    <script type="text/javascript" src="../MathJax/MathJax.js"></script>
+    
+  </head>
+  <body>
+        <div class="reveal">
+      <div class="slides">
+        
+                <section>
+          <h1 class="title">markdown, pandoc and make</h1>
+                              <h2 class="author">Christian Groll</h2>
+                    <h3 class="date"></h3>
+        </section>
+                        
+        <section><section id="markdown" class="titleslide slide level1"><h1><a href="http://daringfireball.net/projects/markdown/">Markdown</a></h1></section><section id="headers" class="slide level2">
+        <h1>Headers</h1>
+        <pre><code>
+        # New section
+        
+        ## New slides</code></pre>
+        </section><section id="lists" class="slide level2">
+        <h1>Lists</h1>
+        <pre><code>
+        * Candy.
+        * Gum.
+        * Booze.
+          
+        - Candy.
+        - Gum.
+        - Booze.</code></pre>
+        <ul>
+        <li>Candy.</li>
+        <li>Gum.</li>
+        <li>Booze.</li>
+        </ul>
+        </section><section id="section" class="slide level2">
+        <h1></h1>
+        <pre><code>
+        1. Red
+        2. Green
+        3. Blue</code></pre>
+        <ol type="1">
+        <li>Red</li>
+        <li>Green</li>
+        <li>Blue</li>
+        </ol>
+        </section><section id="links" class="slide level2">
+        <h1>Links</h1>
+        <pre><code>
+        This link points to [Google](http://www.google.de).</code></pre>
+        <p>This link points to <a href="http://www.google.de">Google</a>.</p>
+        </section><section id="emphasis" class="slide level2">
+        <h1>Emphasis</h1>
+        <pre><code>
+        - normal text
+        - *single asterisks*
+        - **double asterisks**</code></pre>
+        <ul>
+        <li>normal text</li>
+        <li><em>single asterisks</em></li>
+        <li><strong>double asterisks</strong></li>
+        </ul>
+        </section></section>
+        <section><section id="pandoc" class="titleslide slide level1"><h1><a href="http://johnmacfarlane.net/pandoc/">pandoc</a></h1></section><section id="section-1" class="slide level2">
+        <h1></h1>
+        <p><a href="http://www.pandoc.org">pandoc.org</a>:</p>
+        <blockquote>
+        <p>&quot;If you need to convert files from one markup format into another, pandoc is your swiss-army knife.&quot;</p>
+        </blockquote>
+        </section><section id="section-2" class="slide level2">
+        <h1></h1>
+        <p>What for?</p>
+        <ul>
+        <li>enable <strong>markdown usage</strong></li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li><strong>multiple output formats</strong> for single content file</li>
+        </ul>
+        </div>
+        </section><section id="installation" class="slide level2">
+        <h1>Installation</h1>
+        <p>On windows:</p>
+        <ul>
+        <li><a href="https://youtu.be/N9zVyggYeyU">Video: Pandoc installation, windows</a></li>
+        </ul>
+        <div class="fragment">
+        <p>On Linux:</p>
+        <ul>
+        <li>download debian package provided on homepage</li>
+        </ul>
+        </div>
+        </section></section>
+        <section><section id="example-reveal.js-slides" class="titleslide slide level1"><h1>Example: <a href="https://github.com/hakimel/reveal.js/">Reveal.js</a> slides</h1></section><section id="download-reveal.js" class="slide level2">
+        <h1>Download reveal.js</h1>
+        <p>In project directory:</p>
+        <pre><code>git clone https://github.com/hakimel/reveal.js.git</code></pre>
+        </section><section id="section-3" class="slide level2">
+        <h1></h1>
+        <p>Starting small:</p>
+        <ul>
+        <li>input and output <strong>formats</strong></li>
+        <li>input and output <strong>files</strong></li>
+        </ul>
+        <pre class="sh"><code>
+        pandoc -t revealjs -f markdown \
+        -o output/content.slides.html src/content.md</code></pre>
+        </section><section id="section-4" class="slide level2">
+        <h1></h1>
+        <p>Add <strong><code>-s</code></strong> option for <strong>standalone</strong> html file:</p>
+        <pre class="sh"><code>
+        pandoc -s -t revealjs -f markdown \
+        -o output/content.slides.html src/content.md</code></pre>
+        </section><section id="section-5" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>inspect html source in browser: <code>Inspect element</code></li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>adapt <strong>reveal.js path</strong> variable</li>
+        </ul>
+        <pre class="sh"><code>
+        pandoc -s -V revealjs-url=../reveal.js -t revealjs \
+        -f markdown -o output/content.slides.html src/content.md</code></pre>
+        </div>
+        </section><section id="section-6" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>at some point file <strong>paths</strong> were <strong>out of sync</strong> between latest reveal.js version and pandoc version</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>pandoc requires <code>reveal.min.js</code> and <code>reveal.min.css</code></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>first solution: create symbolic links</li>
+        </ul>
+        <pre class="sh"><code>
+        cd reveal.js/js
+        ln -s reveal.js reveal.min.js 
+        cd ../css
+        ln -s reveal.css reveal.min.css </code></pre>
+        </div>
+        </section></section>
+        <section><section id="excursion-pandoc-details" class="titleslide slide level1"><h1>Excursion: pandoc details</h1></section><section id="section-7" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>how is output file created?</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>how are command line <strong>arguments</strong> included?</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <p><a href="https://github.com/jgm/pandoc-templates">pandoc-templates</a></p>
+        <p><a href="https://github.com/jgm/pandoc-templates/blob/master/default.revealjs">default.revealjs</a></p>
+        </div>
+        </section><section id="section-8" class="slide level2">
+        <h1></h1>
+        <p>Better solution for setting paths:</p>
+        <ul>
+        <li><p>use customized pandoc <a href="https://github.com/cgroll/pandoc_custom">template files</a></p>
+        <pre class="sh"><code>
+        git clone https://github.com/cgroll/pandoc_custom.git</code></pre></li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li><p>or as <strong>git subtree</strong>:</p>
+        <pre class="sh"><code>
+        git subtree add --prefix pandoc_custom \
+        https://github.com/cgroll/pandoc_custom.git master --squash</code></pre></li>
+        </ul>
+        </div>
+        </section><section id="section-9" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>set reveal.js path in template according to your needs</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>use customized pandoc settings during call</li>
+        </ul>
+        <pre><code>      pandoc --template=pandoc_custom/templates/revealjs.template \
+        -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+        -o output/content.slides.html src/content.md</code></pre>
+        </div>
+        </section><section id="mathjax" class="slide level2">
+        <h1><a href="http://www.mathjax.org/">MathJax</a></h1>
+        <ul>
+        <li>rendering mathematical formulas:</li>
+        </ul>
+        <pre class="sourceCode latex"><code class="sourceCode latex">
+        $$
+        \gamma(n)=\sum_{i=1}^{n}x^{2}
+        $$</code></pre>
+        <div class="fragment">
+        <ul>
+        <li>clone from github:</li>
+        </ul>
+        <pre><code>git clone https://github.com/mathjax/MathJax.git</code></pre>
+        </div>
+        <div class="fragment">
+        <p><span class="math"> ⇒ </span> configure <code>MathJax</code> to correctly render formulas</p>
+        </div>
+        </section><section id="section-10" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>include MathJax code in template:</li>
+        </ul>
+        <pre><code>        &lt;!-- include local MathJax --&gt;
+        &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+        MathJax.Hub.Config({
+        &quot;HTML-CSS&quot;: {
+        scale: 80,
+        },
+        extensions: [&quot;tex2jax.js&quot;],
+        TeX: { equationNumbers: { autoNumber: &quot;AMS&quot; } },
+        jax: [&quot;input/TeX&quot;,&quot;output/HTML-CSS&quot;],
+        tex2jax: {inlineMath: [[&quot;$$&quot;,&quot;$$&quot;],[&quot;\\(&quot;,&quot;\\)&quot;]]}});
+        &lt;/script&gt;
+        &lt;script type=&quot;text/javascript&quot; src=&quot;../MathJax/MathJax.js&quot;&gt;&lt;/script&gt;
+        </code></pre>
+        <div class="fragment">
+        <p><span class="math"> ⇒ </span> set MathJax path according to your needs!</p>
+        </div>
+        </section><section id="mathjax-rendered" class="slide level2">
+        <h1>MathJax rendered</h1>
+        <ul>
+        <li>equation without number</li>
+        </ul>
+        <pre class="sourceCode latex"><code class="sourceCode latex">$$\alpha^{2} = \beta^{2}$$</code></pre>
+        <p><br /><span class="math"><em>α</em><sup>2</sup> = <em>β</em><sup>2</sup></span><br /></p>
+        </section><section id="section-11" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>using latex equation environment currently requires <strong>different syntax</strong> for <code>html</code> and <code>pdf</code> output</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li><p>labeled and numbered equation, <strong>html</strong>:</p>
+        <pre class="sourceCode latex"><code class="sourceCode latex">
+        $$<span class="al">\begin{equation}</span>
+        \alpha = \beta
+        \label{eq:sample}
+        <span class="al">\end{equation}</span>$$</code></pre></li>
+        <li><p>same formula for <strong>pdf</strong> output:</p>
+        <pre class="sourceCode latex"><code class="sourceCode latex">
+        \begin{equation}
+        \alpha = \beta
+        \label{eq:sample}
+        \end{equation}</code></pre></li>
+        </ul>
+        </div>
+        </section><section id="pandoc-core" class="slide level2">
+        <h1>pandoc <strong>core</strong></h1>
+        <ul>
+        <li>both options are parsed differently</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>to get <strong>parsed contents</strong>, export to <strong>native</strong> format</li>
+        </ul>
+        <pre class="sh"><code>
+        pandoc -t native src/content.md -o output/content_native.txt</code></pre>
+        </div>
+        </section><section id="section-12" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>the equations will appear as</li>
+        </ul>
+        <pre><code>
+        ,Para [Math DisplayMath &quot;\\begin{equation}\n\\alpha = \\beta\n\\label{eq:sample}\n\\end{equation}&quot;]
+        ,RawBlock (Format &quot;latex&quot;) &quot;\\begin{equation}\n\\alpha = \\beta\n\\label{eq:sample}\n\\end{equation}&quot;</code></pre>
+        <div class="fragment">
+        <p><span class="math"> ⇒ </span> using <strong>--filter</strong> option allows <strong>pre-processing</strong> of the parsed document</p>
+        </div>
+        </section><section id="section-13" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>using <strong>amsmath.hs</strong> filter to allow raw latex syntax for html also</li>
+        </ul>
+        <pre><code>      pandoc --template=pandoc_custom/templates/revealjs.template \
+        -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+        --filter pandoc_custom/filters/amsmath.hs \
+        -o output/content.slides.html src/content.md</code></pre>
+        </section><section id="section-14" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>labeled and numbered equation:</li>
+        </ul>
+        <pre class="sourceCode latex"><code class="sourceCode latex">
+        \begin{equation}
+        \alpha = \beta
+        \label{eq:sample}
+        \end{equation}</code></pre>
+         <br /><span class="math">$$\begin{equation}
+        \alpha = \beta
+        \label{eq:sample}
+        \end{equation}$$</span><br />
+        </section><section id="section-15" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>labeled aligned equations, single number:</li>
+        </ul>
+        <pre class="sourceCode latex"><code class="sourceCode latex">
+        \begin{equation}
+        \begin{split} 
+        \gamma(n)&amp;=\sum_{i=1}^{n}x^{2}\\
+        &amp;=\sum_{i=1}^{n}x\cdot x
+        \end{split}
+        \label{eq:splitSample}
+        \end{equation}</code></pre>
+         <br /><span class="math">$$\begin{equation}
+        \begin{split} 
+        \gamma(n)&amp;=\sum_{i=1}^{n}x^{2}\\
+        &amp;=\sum_{i=1}^{n}x\cdot x
+        \end{split}
+        \label{eq:splitSample}
+        \end{equation}$$</span><br />
+        </section><section id="section-16" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>aligned equations, one number per line, single label</li>
+        </ul>
+        <pre class="sourceCode latex"><code class="sourceCode latex">
+        \begin{align}
+        \gamma(n)&amp;=\sum_{i=1}^{n}x^{2}\\
+        &amp;=\sum_{i=1}^{n}x\cdot x
+        \label{eq:alignedSample}
+        \end{align}</code></pre>
+         <br /><span class="math">$$\begin{align}
+        \gamma(n)&amp;=\sum_{i=1}^{n}x^{2}\\
+        &amp;=\sum_{i=1}^{n}x\cdot x
+        \label{eq:alignedSample}
+        \end{align}$$</span><br />
+        </section><section id="section-17" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>referring to equations in text</li>
+        </ul>
+        <pre><code>
+        Referring to equations $\eqref{eq:sample}$, $\eqref{eq:splitSample}$
+        and $\eqref{eq:alignedSample}$.</code></pre>
+        <p>Referring to equations <span class="math">$\eqref{eq:sample}$</span>, <span class="math">$\eqref{eq:splitSample}$</span> and <span class="math">$\eqref{eq:alignedSample}$</span>.</p>
+        </section><section id="debugging" class="slide level2">
+        <h1>debugging</h1>
+        <ul>
+        <li>especially for latex, <strong>errors</strong> can be hard to find</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>it might help to look at the <strong>raw</strong> produced <strong><code>tex</code> file</strong></li>
+        </ul>
+        <pre class="sh"><code>
+        pandoc -t latex -f markdown -s -o output/content.tex</code></pre>
+        </div>
+        </section></section>
+        <section><section id="citations-csl" class="titleslide slide level1"><h1>Citations: CSL</h1></section><section id="section-18" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li><a href="http://hackage.haskell.org/package/pandoc-citeproc">pandoc-citeproc</a>:</li>
+        </ul>
+        <blockquote>
+        <p>&quot;a library for rendering bibliographic reference citations into a variety of styles using a macro language called Citation Style Language (CSL)&quot;</p>
+        </blockquote>
+        </section><section id="section-19" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>Linux installation:</li>
+        </ul>
+        <pre class="sh"><code>
+        sudo apt-get install pandoc-citeproc</code></pre>
+        </section><section id="section-20" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>keep list of references in bibtex format</li>
+        </ul>
+        <pre><code>@article{citeulike:1232469,
+        author = {Rubinstein, Mark},
+        citeulike-article-id = {1232469},
+        citeulike-linkout-0 = {http://www.jstor.org/stable/2697771},
+        journal = {The Journal of Finance},
+        number = {3},
+        pages = {1041--1045},
+        posted-at = {2007-04-17 17:49:48},
+        priority = {0},
+        title = {{Markowitz&#39;s \&quot;Portfolio Selection\&quot;;: A Fifty-Year Retrospective}},
+        url = {http://www.jstor.org/stable/2697771},
+        volume = {57},
+        year = {2002}
+        }</code></pre>
+        </section><section id="section-21" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>meanwhile bibtex entries for most references are readily available</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>simply google for reference + bibtex</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>export bibtex from <a href="http://www.citeulike.org/user/felixroudier/author/Rubinstein">page</a></li>
+        </ul>
+        </div>
+        </section><section id="citation-style-language" class="slide level2">
+        <h1><a href="http://citationstyles.org/">Citation Style Language</a></h1>
+        <ul>
+        <li>define style of references and bibliography in <em>.csl</em> file</li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li><a href="http://editor.citationstyles.org/about/">search citation styles</a></li>
+        </ul>
+        </div>
+        </section><section id="section-22" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>pre-process citations in pandoc</li>
+        </ul>
+        <pre><code>
+        pandoc --template=pandoc_custom/templates/revealjs.template \
+        -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+        --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
+        --bibliography=refs.bib \
+        -o output/content.slides.html src/content.md</code></pre>
+        </section><section id="section-23" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>cite reference:</li>
+        </ul>
+        <p><code>... according to [@citeulike:1232469].</code></p>
+        <div class="fragment">
+        <p><strong>Output</strong>: ... according to <span class="citation" data-cites="citeulike:1232469">(Rubinstein, 2002)</span>.</p>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>references will appear automatically in bibliography at the end</li>
+        </ul>
+        </div>
+        </section><section id="section-24" class="slide level2">
+        <h1></h1>
+        <p>Internal links</p>
+        <ul>
+        <li>link to section</li>
+        </ul>
+        <pre><code>
+        Still remember [the pandoc introduction](#pandoc)?</code></pre>
+        <p>Still remember <a href="#/pandoc">the pandoc introduction</a>?</p>
+        </section><section id="resources" class="slide level2">
+        <h1>Resources</h1>
+        <ul>
+        <li><a href="http://johnmacfarlane.net/BayHac2014/#/">John MacFarlane, slides</a></li>
+        <li><p><a href="https://youtu.be/6TBpB-BEiIg">John MacFarlane, video</a></p></li>
+        <li><p><a href="https://youtu.be/idD5pNAXL3s">Video: markdown to html slides using pandoc</a></p></li>
+        </ul>
+        </section><section id="pandoc-alternatives" class="slide level2">
+        <h1>Pandoc alternatives</h1>
+        <p>you could also circumvent raw LaTeX with:</p>
+        <ul>
+        <li><a href="www.lyx.org">LyX</a></li>
+        <li><a href="http://orgmode.org/">emacs org-mode</a></li>
+        </ul>
+        </section></section>
+        <section><section id="make" class="titleslide slide level1"><h1><a href="http://www.gnu.org/software/make/">Make</a></h1></section><section id="automation" class="slide level2">
+        <h1>Automation</h1>
+        <ul>
+        <li>using command line allows for easy automation of repetitive tasks</li>
+        <li>GUIs and mouse clicks are a lot less easy to automate</li>
+        </ul>
+        </section><section id="section-25" class="slide level2">
+        <h1></h1>
+        <p>Starting small</p>
+        <ul>
+        <li><p>bash script: create file <code>export.sh</code> with content</p>
+        <pre class="sh"><code>
+        pandoc --template=pandoc_custom/templates/revealjs.template \
+        -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+        --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \   
+        --bibliography=refs.bib \
+        -o output/content.slides.html src/content.md</code></pre></li>
+        <li><p>call script with</p>
+        <pre class="sh"><code>sh export.sh   </code></pre></li>
+        </ul>
+        </section><section id="section-26" class="slide level2">
+        <h1></h1>
+        <p>Improvements:</p>
+        <ul>
+        <li>only execute command, if source file was modified</li>
+        <li>subsume multiple commands with pattern rules</li>
+        </ul>
+        <p><span class="math"> ⇒ </span> use a <code>Makefile</code></p>
+        </section><section id="section-27" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>set target files with dependencies</li>
+        <li>conditional execution: command is executed, if:</li>
+        <li>target file does not exist</li>
+        <li>last modification of dependency is more recent than last modification of target file</li>
+        </ul>
+        </section><section id="section-28" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>create <code>Makefile</code></li>
+        <li><p><code>Make</code> syntax:</p>
+        <pre class="make"><code>target: dependency1 dependency2
+            target rule</code></pre></li>
+        <li><p>important: line with target rule MUST start with TAB</p></li>
+        </ul>
+        </section><section id="usecase-pandoc-slide-creation" class="slide level2">
+        <h1>Usecase: pandoc slide creation</h1>
+        <pre class="make"><code>output/content.slides.html: src/content.md Makefile refs.bib
+            pandoc --template=pandoc_custom/templates/revealjs.template \
+            -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+            --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
+            --bibliography=refs.bib \
+            -o output/content.slides.html src/content.md</code></pre>
+        </section><section id="section-29" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li><p>you can build individual targets by calling <code>Make</code> on them:</p>
+        <pre class="sh"><code>
+        make output/content.slides.html</code></pre></li>
+        <li><p>if no argument is specified, <code>Make</code> automatically builds the first target appearing in a <code>Makefile</code></p></li>
+        </ul>
+        </section><section id="section-30" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li>adding an additional output target</li>
+        </ul>
+        <pre class="make"><code>
+        </code></pre>
+        </section><section id="section-31" class="slide level2">
+        <h1></h1>
+        <p>dummy targets:</p>
+        <ul>
+        <li>use dummy targets to subsume multiple targets</li>
+        </ul>
+        </section><section id="additional-resources" class="slide level2">
+        <h1>Additional resources</h1>
+        <ul>
+        <li>Make lessons at <a href="http://software-carpentry.org/v4/make/index.html">Software Carpentry</a></li>
+        </ul>
+        </section></section>
+        <section><section id="coding-best-practices" class="titleslide slide level1"><h1>coding: best practices</h1></section><section id="section-32" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li><a href="https://grollchristian.wordpress.com/2013/08/16/programming-style-guidelines-r-and-matlab/">Programming style guidelines</a></li>
+        <li><a href="http://julia.readthedocs.org/en/latest/manual/style-guide/">Julia style guide</a></li>
+        </ul>
+        </section></section>
+        <section><section id="julia" class="titleslide slide level1"><h1><a href="http://julialang.org/">Julia</a></h1></section><section id="section-33" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li><a href="https://github.com/JuliaLang/IJulia.jl">IJulia</a></li>
+        <li><a href="https://juliabox.org/">JuliaBox</a></li>
+        <li>notebook files</li>
+        </ul>
+        </section></section>
+        <section><section id="notebook-environments" class="titleslide slide level1"><h1>Notebook environments</h1></section><section id="section-34" class="slide level2">
+        <h1></h1>
+        <ul>
+        <li><a href="http://beakernotebook.com/">beaker notebook</a></li>
+        <li><a href="http://jupyter.org/">Jupyter</a></li>
+        </ul>
+        </section><section id="r-users" class="slide level2">
+        <h1>R Users</h1>
+        <ul>
+        <li><a href="https://www.coursera.org/course/rprog">Coursera: R Programming</a></li>
+        <li><a href="http://rmarkdown.rstudio.com/">R Markdown</a></li>
+        <li><a href="http://slidify.org/">Slidify</a></li>
+        <li><a href="http://www.rpubs.com/">RPubs</a></li>
+        <li><a href="https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN">RStudio git support</a></li>
+        <li><a href="https://grollchristian.wordpress.com/2013/09/07/presentations-in-r/">Presenting your findings with R</a></li>
+        </ul>
+        </section><section id="visualization" class="slide level2">
+        <h1>Visualization</h1>
+        <ul>
+        <li><a href="http://vita.had.co.nz/papers/layered-grammar.html">A layered grammar of graphics</a></li>
+        </ul>
+        </section><section id="data-manipulation" class="slide level2">
+        <h1>Data manipulation</h1>
+        <ul>
+        <li><a href="http://vita.had.co.nz/papers/tidy-data.html">Tidy data</a></li>
+        <li><a href="http://vita.had.co.nz/papers/plyr.html">The split-apply-combine strategy for data analysis</a></li>
+        <li><a href="https://code.google.com/p/google-refine/">Google refine</a></li>
+        </ul>
+        </section><section id="what-others-say" class="slide level2">
+        <h1>What others say</h1>
+        <ul>
+        <li><a href="http://hadley.wickham.usesthis.com/">Hadley Wickham</a></li>
+        <li><a href="http://kieranhealy.org/resources/">Kieran Healy</a></li>
+        <li><a href="https://www.coursera.org/course/repdata">Coursera: Reproducible Research</a></li>
+        <li><a href="http://www2.ccr.buffalo.edu/halfon/courses/Resources%20for%20Students%20and%20Postdocs/other_docs/Wilson_2006_American%20Scientist.pdf">Gregory Wilson</a></li>
+        </ul>
+        </section><section id="miscellaneous" class="slide level2">
+        <h1>Miscellaneous</h1>
+        <ul>
+        <li>docker</li>
+        <li>aws</li>
+        </ul>
+        </section><section id="references" class="slide level2 unnumbered">
+        <h1>References</h1>
+        <div class="references">
+        <p>Rubinstein, M., 2002. Markowitz’s “Portfolio Selection”: A Fifty-Year Retrospective. The Journal of Finance 57, 1041–1045.</p>
+        </div>
+        </section></section>
+      </div>
+    </div>
+    
+    
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+    
+    <script>
+      
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+      controls: true,         // Display controls in the bottom right corner
+      progress: true,         // Display a presentation progress bar
+      history: true,          // Push each slide change to the browser history
+      center: true,                       // Vertical centering of slides
+      maxScale: 1.5,                  // Bounds for smallest/largest possible content scale
+      slideNumber: true,                // Display the page number of the current slide
+      theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+      transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+      
+      // Optional libraries used to extend on reveal.js
+      dependencies: [
+      { src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      { src: '../reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+      //          { src: '../reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+      //          { src: '../reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+      ]});
+    </script>
+      </body>
+</html>

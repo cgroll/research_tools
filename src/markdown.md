@@ -150,7 +150,7 @@ pandoc -s -V revealjs-url=../reveal.js -t revealjs \
 
 ##
 
-- currently some file **paths** are **out of sync** between latest
+- at some point file **paths** were **out of sync** between latest
   reveal.js version and pandoc version
 
 . . .
@@ -207,6 +207,20 @@ Better solution for setting paths:
 	https://github.com/cgroll/pandoc_custom.git master --squash
 	````
 
+##
+
+- set reveal.js path in template according to your needs
+
+. . .
+
+- use customized pandoc settings during call
+
+````
+      pandoc --template=pandoc_custom/templates/revealjs.template \
+-s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+-o output/content.slides.html src/content.md
+````
+
 ## [MathJax](http://www.mathjax.org/)
 
 - rendering mathematical formulas:
@@ -233,7 +247,7 @@ $\Rightarrow$ configure `MathJax` to correctly render formulas
   
 ## 
 
-- example MathJax code in template:
+- include MathJax code in template:
   
 ````
 	    <!-- include local MathJax -->
@@ -256,17 +270,6 @@ tex2jax: {inlineMath: [["$$","$$"],["\\(","\\)"]]}});
 $\Rightarrow$ set MathJax path according to your needs!
 
 
-## 
-
-- link to template file in pandoc command
-  
-````sh
-
-pandoc --template=pandoc_custom/templates/revealjs.template \
--s -V revealjs-url=../reveal.js -t revealjs \
--f markdown -o output/content.slides.html src/content.md
-````
-
 ## MathJax rendered
 
 - equation without number
@@ -279,12 +282,12 @@ $$\alpha^{2} = \beta^{2}$$
 
 ##
 
-- using latex equation environment currently requires different syntax
-  for `html` and `pdf` output
+- using latex equation environment currently requires **different
+  syntax** for `html` and `pdf` output
 
 . . .
 
-- labeled and numbered equation, `html`:
+- labeled and numbered equation, **html**:
   
 	````latex
 	
@@ -294,9 +297,8 @@ $$\alpha^{2} = \beta^{2}$$
 	\end{equation}$$
 	````
 
-##
 
-- same formula for `pdf` output:
+- same formula for **pdf** output:
 
 	````latex
 	
@@ -306,10 +308,13 @@ $$\alpha^{2} = \beta^{2}$$
 	\end{equation}
 	````
 
-## 
+## pandoc **core**
 
-- both options are parsed differently 
-- to get parsed contents, export to `native` format
+- both options are parsed differently
+
+. . .
+
+- to get **parsed contents**, export to **native** format
 
 ````sh
 
@@ -325,21 +330,35 @@ pandoc -t native src/content.md -o output/content_native.txt
 ,Para [Math DisplayMath "\\begin{equation}\n\\alpha = \\beta\n\\label{eq:sample}\n\\end{equation}"]
 ,RawBlock (Format "latex") "\\begin{equation}\n\\alpha = \\beta\n\\label{eq:sample}\n\\end{equation}"
 ````
-$\Rightarrow$ using an appropriate `--filter` option might solve the problem
+
+. . .
+
+
+$\Rightarrow$ using **--filter** option allows **pre-processing** of
+the parsed document
 
 ## 
 
-- especially for latex, errors can be hard to find
-- it might help to look at the **raw** produced **`tex` file**
+- using **amsmath.hs** filter to allow raw latex syntax for html also
 
-````sh
-
-pandoc -t latex -f markdown -s -o output/content.tex
+````
+      pandoc --template=pandoc_custom/templates/revealjs.template \
+-s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+--filter pandoc_custom/filters/amsmath.hs \
+-o output/content.slides.html src/content.md
 ````
 
 ##
 
 - labeled and numbered equation:
+
+````latex
+
+\begin{equation}
+\alpha = \beta
+\label{eq:sample}
+\end{equation}
+````
 
 \begin{equation}
 \alpha = \beta
@@ -405,8 +424,23 @@ and $\eqref{eq:alignedSample}$.
 Referring to equations $\eqref{eq:sample}$, $\eqref{eq:splitSample}$
 and $\eqref{eq:alignedSample}$.
 
+## debugging
 
-## Citations
+- especially for latex, **errors** can be hard to find
+
+. . .
+
+- it might help to look at the **raw** produced **`tex` file**
+
+````sh
+
+pandoc -t latex -f markdown -s -o output/content.tex
+````
+
+
+
+# Citations: CSL
+##
 
 -
  [pandoc-citeproc](http://hackage.haskell.org/package/pandoc-citeproc):
@@ -448,7 +482,13 @@ year = {2002}
 ##
 
 - meanwhile bibtex entries for most references are readily available
+
+. . .
+
 - simply google for reference + bibtex
+
+. . .
+
 - export bibtex from
   [page](http://www.citeulike.org/user/felixroudier/author/Rubinstein) 
   
@@ -456,6 +496,9 @@ year = {2002}
 ## [Citation Style Language](http://citationstyles.org/)
 
 - define style of references and bibliography in *.csl* file
+
+. . .
+
 - [search citation styles](http://editor.citationstyles.org/about/)
   
 ## 
@@ -479,7 +522,11 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
   ... according to [@citeulike:1232469].
   ````
   
+. . .
+
   **Output**: ... according to [@citeulike:1232469].
+
+. . .
   
 - references will appear automatically in bibliography at the end
   
