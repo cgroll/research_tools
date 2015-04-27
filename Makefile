@@ -7,6 +7,7 @@ OUTDIR = output
 OUT := $(addprefix $(OUTDIR)/,$(FILES))
 
 CURRENT_TARGET = output/git
+CURRENT_TARGET = output/markdown
 
 current: $(CURRENT_TARGET).slides.html
 
@@ -15,6 +16,20 @@ pdf: $(CURRENT_TARGET).pdf
 
 all: reveal pdf
 everything: $(OUT)
+
+## markdown, pandoc, make
+#######
+
+$(OUTDIR)/markdown.slides.html: src/markdown.md Makefile refs.bib
+	pandoc --template=$(TMPL) \
+	-V slideNumber=true \
+	--filter pandoc_custom/filters/amsmath.hs \
+	-s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+	--include-in-header=pandoc_custom/css/reveal_left_strong.css \
+	--filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
+	--bibliography=refs.bib \
+	-o output/markdown.slides.html src/markdown.md
+
 
 ## git 
 #######

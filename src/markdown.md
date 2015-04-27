@@ -1,5 +1,7 @@
-# [Markdown](http://daringfireball.net/projects/markdown/)
+% markdown, pandoc and make
+% Christian Groll
 
+# [Markdown](http://daringfireball.net/projects/markdown/)
 
 ## Headers
 
@@ -69,30 +71,53 @@ This link points to [Google](http://www.google.de).
 
 ##
 
+[pandoc.org](http://www.pandoc.org):
+
 > "If you need to convert files from one markup format into another,
 > pandoc is your swiss-army knife."
 
 
-[http://johnmacfarlane.net/pandoc/](http://johnmacfarlane.net/pandoc/)
+
 
 ## 
 
 What for?
 
-- enable markdown usage
-- multiple output formats for single content file
+- enable **markdown usage**
+
+. . .
+
+- **multiple output formats** for single content file
   
-##
+## Installation
+
+On windows:
 
 - [Video: Pandoc installation, windows](https://youtu.be/N9zVyggYeyU)
-- [Video: markdown to html slides using pandoc](https://youtu.be/idD5pNAXL3s)
+
+. . .
+
+On Linux:
+
+- download debian package provided on homepage
+
+
+# Example: [Reveal.js](https://github.com/hakimel/reveal.js/) slides
+
+## Download reveal.js
+
+In project directory:
+
+````
+git clone https://github.com/hakimel/reveal.js.git
+````
   
 ##
 
-Starting small
+Starting small:
 
-- input and output formats
-- input and output files
+- input and output **formats**
+- input and output **files**
   
 ````sh
 
@@ -101,7 +126,7 @@ pandoc -t revealjs -f markdown \
 ````
 ##
 
-Add `-s` option for standalone html file:
+Add **`-s`** option for **standalone** html file:
 
 ````sh
 
@@ -112,7 +137,10 @@ pandoc -s -t revealjs -f markdown \
 ##
 
 - inspect html source in browser: `Inspect element`
-- adapt reveal.js path variable
+
+. . .
+
+- adapt **reveal.js path** variable
   
 ````sh
 
@@ -122,9 +150,15 @@ pandoc -s -V revealjs-url=../reveal.js -t revealjs \
 
 ##
 
-- currently some files paths are out of sync between latest reveal.js
-  version and pandoc version
+- currently some file **paths** are **out of sync** between latest
+  reveal.js version and pandoc version
+
+. . .
+
 - pandoc requires `reveal.min.js` and `reveal.min.css`
+
+. . .
+
 - first solution: create symbolic links
   
 ````sh
@@ -135,9 +169,47 @@ cd ../css
 ln -s reveal.css reveal.min.css 
 ````
 
+# Excursion: pandoc details
+
+## 
+
+- how is output file created?
+
+. . .
+
+- how are command line **arguments** included?
+
+. . .
+
+[pandoc-templates](https://github.com/jgm/pandoc-templates)
+
+[default.revealjs](https://github.com/jgm/pandoc-templates/blob/master/default.revealjs)
+
+##
+
+Better solution for setting paths:
+
+- use customized pandoc [template
+  files](https://github.com/cgroll/pandoc_custom)
+  
+	````sh
+	
+	git clone https://github.com/cgroll/pandoc_custom.git
+	````
+  
+. . .
+
+- or as **git subtree**:
+  
+	````sh
+	
+	git subtree add --prefix pandoc_custom \
+	https://github.com/cgroll/pandoc_custom.git master --squash
+	````
+
 ## [MathJax](http://www.mathjax.org/)
 
-- including mathematical formulas:
+- rendering mathematical formulas:
   
 ````latex
 
@@ -146,45 +218,30 @@ $$
 $$
 ````
 
+. . .
+
+- clone from github: 
+
+````
+git clone https://github.com/mathjax/MathJax.git
+````
+
+. . .
+
 $\Rightarrow$ configure `MathJax` to correctly render formulas
 
-## 
-
-`pandoc` details:
-
-- how is output file created?
-- how are command line arguments included?
-  
-[pandoc-templates](https://github.com/jgm/pandoc-templates)
-
-[default.revealjs](https://github.com/jgm/pandoc-templates/blob/master/default.revealjs)
-
-##
-
-- better solution for setting paths
-- custom pandoc [template files](https://github.com/cgroll/pandoc_custom) 
-  
-	````sh
-	
-	git clone https://github.com/cgroll/pandoc_custom.git
-	````
-  
-- or as **git subtree**:
-  
-	````sh
-	
-	git subtree add --prefix pandoc_custom \
-	https://github.com/cgroll/pandoc_custom.git master --squash
-	````
   
 ## 
 
 - example MathJax code in template:
   
 ````
-<!-- include local MathJax -->
+	    <!-- include local MathJax -->
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
+"HTML-CSS": {
+scale: 80,
+},
 extensions: ["tex2jax.js"],
 TeX: { equationNumbers: { autoNumber: "AMS" } },
 jax: ["input/TeX","output/HTML-CSS"],
@@ -193,6 +250,8 @@ tex2jax: {inlineMath: [["$$","$$"],["\\(","\\)"]]}});
 <script type="text/javascript" src="../MathJax/MathJax.js"></script>
 
 ````
+
+. . .
 
 $\Rightarrow$ set MathJax path according to your needs!
 
@@ -208,9 +267,7 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 -f markdown -o output/content.slides.html src/content.md
 ````
 
-##
-
-MathJax rendered
+## MathJax rendered
 
 - equation without number
 
@@ -224,6 +281,8 @@ $$\alpha^{2} = \beta^{2}$$
 
 - using latex equation environment currently requires different syntax
   for `html` and `pdf` output
+
+. . .
 
 - labeled and numbered equation, `html`:
   
@@ -271,7 +330,7 @@ $\Rightarrow$ using an appropriate `--filter` option might solve the problem
 ## 
 
 - especially for latex, errors can be hard to find
-- it might help to look at the raw produced `tex` file
+- it might help to look at the **raw** produced **`tex` file**
 
 ````sh
 
@@ -317,11 +376,11 @@ pandoc -t latex -f markdown -s -o output/content.tex
   
 ````latex
 
-$$\begin{align}
+\begin{align}
 \gamma(n)&=\sum_{i=1}^{n}x^{2}\\
 &=\sum_{i=1}^{n}x\cdot x
 \label{eq:alignedSample}
-\end{align}$$
+\end{align}
 ````
 
 
@@ -414,13 +473,13 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 
 ## 
 
-- cite reference
+- cite reference:
   
   ````
   ... according to [@citeulike:1232469].
   ````
   
-  ... according to [@citeulike:1232469].
+  **Output**: ... according to [@citeulike:1232469].
   
 - references will appear automatically in bibliography at the end
   
@@ -432,15 +491,18 @@ Internal links
   
 ````
 
-Still remember [the git introduction](#git)?
+Still remember [the pandoc introduction](#pandoc)?
 ````
 
-Still remember [the git introduction](#git)?
+Still remember [the pandoc introduction](#pandoc)?
 
 ## Resources
 
 - [John MacFarlane, slides](http://johnmacfarlane.net/BayHac2014/#/)
 - [John MacFarlane, video](https://youtu.be/6TBpB-BEiIg)
+
+
+- [Video: markdown to html slides using pandoc](https://youtu.be/idD5pNAXL3s)
 
 
 ## Pandoc alternatives
@@ -553,6 +615,7 @@ dummy targets:
 
 # coding: best practices
 
+##
 - [Programming style guidelines](https://grollchristian.wordpress.com/2013/08/16/programming-style-guidelines-r-and-matlab/)
 - [Julia style guide](http://julia.readthedocs.org/en/latest/manual/style-guide/)
 
