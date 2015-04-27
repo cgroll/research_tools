@@ -291,8 +291,8 @@ git **forgets nothing**:
 
 - design of branches encourages merging:
 	- not meant for infinite second version
-	- one single final outcome: **eventually** branches should be
-     **merged to master**
+	- one single final outcome: **eventually** changes on other
+     branches should be **merged to master**
 
 . . .
 
@@ -371,7 +371,7 @@ git commit -m "merge conflicts manually resolved"
 - if you need to update your repo from a remote, and do not want to
   commit temporary modifications:
 	````
-	git stash
+			git stash
 	git pull origin master
 	git stash apply
 	````
@@ -514,7 +514,7 @@ back into *master*
 **Be careful:**
 
 If other people did build some changes on your history, you might
-delete some old commits that is required by their work.
+delete some old commits that are required by their work.
 
 . . .
 
@@ -532,7 +532,7 @@ not break existing commit sequences.
 . . .
 
 - if experiment fails: **discard** modifications by checking out the
-  latest commit file version
+  latest committed file version
 ````
 git checkout filename.txt
 ````

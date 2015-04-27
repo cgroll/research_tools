@@ -360,7 +360,7 @@
         <li>design of branches encourages merging:
         <ul>
         <li>not meant for infinite second version</li>
-        <li>one single final outcome: <strong>eventually</strong> branches should be <strong>merged to master</strong></li>
+        <li>one single final outcome: <strong>eventually</strong> changes on other branches should be <strong>merged to master</strong></li>
         </ul></li>
         </ul>
         </div>
@@ -439,7 +439,7 @@
         <h1>Update unclean workspace</h1>
         <ul>
         <li><p>if you need to update your repo from a remote, and do not want to commit temporary modifications:</p>
-        <pre><code>git stash
+        <pre><code>        git stash
         git pull origin master
         git stash apply</code></pre></li>
         </ul>
@@ -584,7 +584,7 @@
         </div>
         <div class="fragment">
         <p><strong>Be careful:</strong></p>
-        <p>If other people did build some changes on your history, you might delete some old commits that is required by their work.</p>
+        <p>If other people did build some changes on your history, you might delete some old commits that are required by their work.</p>
         </div>
         <div class="fragment">
         <p><span class="math"> ⇒ </span> <strong>Never mess with publicly available history</strong> in order to not break existing commit sequences.</p>
@@ -601,7 +601,7 @@
         </div>
         <div class="fragment">
         <ul>
-        <li><p>if experiment fails: <strong>discard</strong> modifications by checking out the latest commit file version</p>
+        <li><p>if experiment fails: <strong>discard</strong> modifications by checking out the latest committed file version</p>
         <pre><code>git checkout filename.txt</code></pre></li>
         </ul>
         </div>
