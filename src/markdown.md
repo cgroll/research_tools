@@ -310,26 +310,26 @@ $$\alpha^{2} = \beta^{2}$$
 
 - labeled and numbered equation, **html**:
   
-  ````latex
-  
-  $$\begin{equation}
-  \alpha = \beta
-  \label{eq:sample}
-  \end{equation}$$
-  ````
+	````latex
+	
+	$$\begin{equation}
+	\alpha = \beta
+	\label{eq:sample}
+	\end{equation}$$
+	````
   
 . . .
 
 
 - same formula for **pdf** output:
   
-  ````latex
-  
-  \begin{equation}
-  \alpha = \beta
-  \label{eq:sample}
-  \end{equation}
-  ````
+	````latex
+	
+	\begin{equation}
+	\alpha = \beta
+	\label{eq:sample}
+	\end{equation}
+	````
   
 ## pandoc **core**
 
@@ -792,17 +792,17 @@ $\Rightarrow$ use variables
 OUTDIR = output
 
 $(OUTDIR)/content.slides.html: src/content.md Makefile refs.bib
-	pandoc --template=pandoc_custom/templates/revealjs.template \
-	-s -V revealjs-url=../reveal.js -t revealjs -f markdown \
-	--filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
-	--bibliography=refs.bib \
-	-o $@ $<
+pandoc --template=pandoc_custom/templates/revealjs.template \
+-s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+--filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
+--bibliography=refs.bib \
+-o $@ $<
 ````
 
 ## [Pattern rules](http://www.gnu.org/software/make/manual/html_node/Pattern-Rules.html#Pattern-Rules)
 
 - applying identical rules to multiple targets
-
+  
 . . .
 
 ````
@@ -818,5 +818,5 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 ## Resources
 
 - Make lessons at [Software Carpentry](http://software-carpentry.org/v4/make/index.html)
-
-
+  
+  
