@@ -75,6 +75,7 @@ debug: src/git.md Makefile refs.bib
 publish: $(OUT) Makefile refs.bib
 	git checkout gh-pages
 	git checkout master output/git.slides.html
+	git checkout master output/markdown.slides.html
 	git commit -m "slides updated"
 	git push origin gh-pages
 	git checkout master
