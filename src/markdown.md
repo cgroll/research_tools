@@ -74,14 +74,14 @@ This link points to [Google](http://www.google.de).
 . . .
 
 
-````
-function addTwo(x)
-return x+2
-end
-````
+			````
+	function addTwo(x)
+	return x+2
+	end
+	````
 
 ````
-function addTwo(x)
+		function addTwo(x)
 return x+2
 end
 ````
@@ -213,20 +213,20 @@ Better solution for setting paths:
 - use customized pandoc [template
   files](https://github.com/cgroll/pandoc_custom)
   
-  ````sh
-  
-  git clone https://github.com/cgroll/pandoc_custom.git
-  ````
+	````sh
+	
+	git clone https://github.com/cgroll/pandoc_custom.git
+	````
   
 . . .
 
 - or as **git subtree**:
   
-  ````sh
-  
-  git subtree add --prefix pandoc_custom \
-  https://github.com/cgroll/pandoc_custom.git master --squash
-  ````
+	````sh
+	
+	git subtree add --prefix pandoc_custom \
+	https://github.com/cgroll/pandoc_custom.git master --squash
+	````
   
 ##
 
@@ -237,7 +237,7 @@ Better solution for setting paths:
 - **point to** customized pandoc settings during call
   
 ````
-pandoc --template=pandoc_custom/templates/revealjs.template \
+	pandoc --template=pandoc_custom/templates/revealjs.template \
 -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
 -o output/content.slides.html src/content.md
 ````
@@ -271,7 +271,7 @@ $\Rightarrow$ configure `MathJax` to correctly render formulas
 - include **MathJax** code in reveal.js **template**:
   
 ````
-<!-- include local MathJax -->
+		<!-- include local MathJax -->
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
 "HTML-CSS": {
@@ -607,22 +607,22 @@ Starting small
 
 - **bash script**: create file `export.sh` with content
   
-  ````sh
-  
-  pandoc --template=pandoc_custom/templates/revealjs.template \
-  -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
-  --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \   
-  --bibliography=refs.bib \
-  -o output/content.slides.html src/content.md
-  ````
+	````sh
+	
+	pandoc --template=pandoc_custom/templates/revealjs.template \
+	-s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+	--filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \   
+	--bibliography=refs.bib \
+	-o output/content.slides.html src/content.md
+	````
   
 . . .
 
 - call script with
   
-  ````sh
-  sh export.sh   
-  ````
+	````sh
+	sh export.sh   
+	````
   
 ##
 
@@ -663,10 +663,10 @@ $\Rightarrow$ use a `Makefile`
 
 - syntax:
   
-  ````make
-  target: dependency1 dependency2
-  target rule
-  ````
+	````make
+	target: dependency1 dependency2
+	target rule
+	````
   
 . . .
 
@@ -699,10 +699,10 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 
 - you can build **individual targets** by calling `Make` on them:
   
-  ````sh
-  
-  make output/content.slides.html
-  ````
+	````sh
+	
+	make output/content.slides.html
+	````
   
 . . .
 
@@ -819,4 +819,9 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
 
 - Make lessons at [Software Carpentry](http://software-carpentry.org/v4/make/index.html)
   
-  
+# References
+
+## 
+
+### Cited in pandoc chapter:
+
