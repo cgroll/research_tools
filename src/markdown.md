@@ -66,28 +66,28 @@ This link points to [Google](http://www.google.de).
 - *single asterisks*
 - **double asterisks**
   
-
+  
 ## Code blocks
 
 - indicated by **backticks** or **indentation**
-
+  
 . . .
 
 
-			````
-	function addTwo(x)
-		return x+2
-	end
-	````
+````
+function addTwo(x)
+return x+2
+end
+````
 
 ````
-		function addTwo(x)
-	return x+2
+function addTwo(x)
+return x+2
 end
 ````
 
 
-  
+
 # [pandoc](http://johnmacfarlane.net/pandoc/)
 
 ##
@@ -105,7 +105,7 @@ end
 What for?
 
 - enable **markdown usage**
-
+  
 . . .
 
 - **multiple output formats** for single content file
@@ -115,14 +115,14 @@ What for?
 On windows:
 
 - [Video: Pandoc installation, windows](https://youtu.be/N9zVyggYeyU)
-
+  
 . . .
 
 On Linux:
 
 - download debian package provided on homepage
-
-
+  
+  
 # Example: [Reveal.js](https://github.com/hakimel/reveal.js/) slides
 
 ## Download reveal.js
@@ -132,7 +132,7 @@ In project directory:
 ````
 git clone https://github.com/hakimel/reveal.js.git
 ````
-  
+
 ##
 
 Starting small:
@@ -158,7 +158,7 @@ pandoc -s -t revealjs -f markdown \
 ##
 
 - inspect html source in browser: `Inspect element`
-
+  
 . . .
 
 - adapt **reveal.js path** variable
@@ -173,11 +173,11 @@ pandoc -s -V revealjs-url=../reveal.js -t revealjs \
 
 - at some point file **paths** were **out of sync** between latest
   reveal.js version and pandoc version
-
+  
 . . .
 
 - pandoc requires `reveal.min.js` and `reveal.min.css`
-
+  
 . . .
 
 - first solution: create symbolic links
@@ -195,11 +195,11 @@ ln -s reveal.css reveal.min.css
 ## 
 
 - how is output file created?
-
+  
 . . .
 
 - how are command line **arguments** included?
-
+  
 . . .
 
 [pandoc-templates](https://github.com/jgm/pandoc-templates)
@@ -213,31 +213,31 @@ Better solution for setting paths:
 - use customized pandoc [template
   files](https://github.com/cgroll/pandoc_custom)
   
-	````sh
-	
-	git clone https://github.com/cgroll/pandoc_custom.git
-	````
+  ````sh
+  
+  git clone https://github.com/cgroll/pandoc_custom.git
+  ````
   
 . . .
 
 - or as **git subtree**:
   
-	````sh
-	
-	git subtree add --prefix pandoc_custom \
-	https://github.com/cgroll/pandoc_custom.git master --squash
-	````
-
+  ````sh
+  
+  git subtree add --prefix pandoc_custom \
+  https://github.com/cgroll/pandoc_custom.git master --squash
+  ````
+  
 ##
 
 - set reveal.js **path** in **template** according to your needs
-
+  
 . . .
 
 - **point to** customized pandoc settings during call
-
+  
 ````
-      pandoc --template=pandoc_custom/templates/revealjs.template \
+pandoc --template=pandoc_custom/templates/revealjs.template \
 -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
 -o output/content.slides.html src/content.md
 ````
@@ -256,7 +256,7 @@ $$
 . . .
 
 - clone from github: 
-
+  
 ````
 git clone https://github.com/mathjax/MathJax.git
 ````
@@ -265,13 +265,13 @@ git clone https://github.com/mathjax/MathJax.git
 
 $\Rightarrow$ configure `MathJax` to correctly render formulas
 
-  
+
 ## 
 
 - include **MathJax** code in reveal.js **template**:
   
 ````
-	    <!-- include local MathJax -->
+<!-- include local MathJax -->
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
 "HTML-CSS": {
@@ -294,7 +294,7 @@ $\Rightarrow$ set MathJax path according to your needs!
 ## MathJax rendered
 
 - equation without number
-
+  
 ````latex
 $$\alpha^{2} = \beta^{2}$$
 ````
@@ -305,40 +305,40 @@ $$\alpha^{2} = \beta^{2}$$
 
 - using latex equation environment currently requires **different
   syntax** for `html` and `pdf` output
-
+  
 . . .
 
 - labeled and numbered equation, **html**:
   
-	````latex
-	
-	$$\begin{equation}
-	\alpha = \beta
-	\label{eq:sample}
-	\end{equation}$$
-	````
-
+  ````latex
+  
+  $$\begin{equation}
+  \alpha = \beta
+  \label{eq:sample}
+  \end{equation}$$
+  ````
+  
 . . .
 
 
 - same formula for **pdf** output:
-
-	````latex
-	
-	\begin{equation}
-	\alpha = \beta
-	\label{eq:sample}
-	\end{equation}
-	````
-
+  
+  ````latex
+  
+  \begin{equation}
+  \alpha = \beta
+  \label{eq:sample}
+  \end{equation}
+  ````
+  
 ## pandoc **core**
 
 - both options are parsed differently
-
+  
 . . .
 
 - to get **parsed contents**, export to **native** format
-
+  
 ````sh
 
 pandoc -t native src/content.md -o output/content_native.txt
@@ -347,7 +347,7 @@ pandoc -t native src/content.md -o output/content_native.txt
 ##
 
 - the equations will appear as
-
+  
 ````
 
 ,Para [Math DisplayMath "\\begin{equation}\n\\alpha = \\beta\n\\label{eq:sample}\n\\end{equation}"]
@@ -359,7 +359,7 @@ pandoc -t native src/content.md -o output/content_native.txt
 
 - using **--filter** option allows **pre-processing** of the parsed
   document 
-
+  
 . . .
 
 $\Rightarrow$ **convert** RawBlock to Math DisplayMath for **html**
@@ -368,9 +368,9 @@ output
 ## 
 
 - **amsmath.hs** filter allows raw latex syntax for html
-
+  
 ````
-      pandoc --template=pandoc_custom/templates/revealjs.template \
+pandoc --template=pandoc_custom/templates/revealjs.template \
 -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
 --filter pandoc_custom/filters/amsmath.hs \
 -o output/content.slides.html src/content.md
@@ -383,7 +383,7 @@ $\Rightarrow$ writing equations without $$
 ##
 
 - labeled and numbered equation:
-
+  
 ````latex
 
 \begin{equation}
@@ -459,11 +459,11 @@ and $\eqref{eq:alignedSample}$.
 ## debugging
 
 - especially for latex, **errors** can be hard to find
-
+  
 . . .
 
 - it might help to look at the **raw** produced **`tex` file**
-
+  
 ````sh
 
 pandoc -t latex -f markdown -s -o output/content.tex
@@ -516,11 +516,11 @@ year = {2002}
 ##
 
 - meanwhile bibtex entries for most references are readily available
-
+  
 . . .
 
 - simply google for reference + bibtex
-
+  
 . . .
 
 - **export bibtex** from
@@ -530,7 +530,7 @@ year = {2002}
 ## [Citation Style Language](http://citationstyles.org/)
 
 - define **style** of references and bibliography in **.csl** file
-
+  
 . . .
 
 - find appropriate style: [search citation styles](http://editor.citationstyles.org/about/)
@@ -558,10 +558,10 @@ pandoc --template=pandoc_custom/templates/revealjs.template \
   
 . . .
 
-  **Output**: ... according to [@citeulike:1232469].
+**Output**: ... according to [@citeulike:1232469].
 
 . . .
-  
+
 - references will appear automatically in bibliography at the end
   
 ## Internal links
@@ -581,11 +581,11 @@ Still remember [the pandoc introduction](#pandoc)?
 
 - [John MacFarlane, slides](http://johnmacfarlane.net/BayHac2014/#/)
 - [John MacFarlane, video](https://youtu.be/6TBpB-BEiIg)
-
-
+  
+  
 - [Video: markdown to html slides using pandoc](https://youtu.be/idD5pNAXL3s)
-
-
+  
+  
 ## Pandoc alternatives
 
 You could also circumvent raw LaTeX with:
@@ -597,155 +597,226 @@ You could also circumvent raw LaTeX with:
 
 ## Automation
 
-- using command line allows for easy automation of repetitive tasks
+- using command line allows for easy **automation** of **repetitive
+  tasks**
 - GUIs and mouse clicks are a lot less easy to automate
   
 ##
 
 Starting small
 
-- bash script: create file `export.sh` with content
-
-	````sh
-	  
-	pandoc --template=pandoc_custom/templates/revealjs.template \
-	-s -V revealjs-url=../reveal.js -t revealjs -f markdown \
-	--filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \   
-	--bibliography=refs.bib \
-	-o output/content.slides.html src/content.md
-	````
+- **bash script**: create file `export.sh` with content
+  
+  ````sh
+  
+  pandoc --template=pandoc_custom/templates/revealjs.template \
+  -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+  --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \   
+  --bibliography=refs.bib \
+  -o output/content.slides.html src/content.md
+  ````
+  
+. . .
 
 - call script with
-
-	````sh
-	sh export.sh   
-	````
-   
+  
+  ````sh
+  sh export.sh   
+  ````
+  
 ##
 
-Improvements:
+Wishful improvements:
 
-- only execute command, if source file was modified
-- subsume multiple commands with pattern rules
+- only execute command, **if** source file was **modified**
+  
+. . .
+
+- subsume multiple commands with **pattern rules**
+  
+. . .
 
 $\Rightarrow$ use a `Makefile`
 
 ## 
 
-- set target files with dependencies
-- conditional execution: command is executed, if:
-  - target file does not exist
-  - last modification of dependency is more recent than last
-    modification of target file
+- specify **target files** together with **dependencies**
+  
+. . .
 
+**conditional execution**: command is executed, if
+
+. . .
+
+- target file does not exist
+  
+. . .
+
+- timestamp of last modification of dependency is more recent than
+  last modification of target file
+  
 ##
 
-- create `Makefile`
-- `Make` syntax:
+- create file called **Makefile**
+  
+. . .
 
-	````make
-	target: dependency1 dependency2
-		target rule
-	````
+- syntax:
+  
+  ````make
+  target: dependency1 dependency2
+  target rule
+  ````
+  
+. . .
 
-- important: line with target rule MUST start with TAB
+- important: line with target rule MUST start with **TAB**
+  
+## Example
 
-## Usecase: pandoc slide creation
+pandoc slide creation:
+
+. . .
+
+- **target**: *output/content.slides.html*
+  
+. . .
+
+- **dependencies**: *src/content.md*, *Makefile* and *refs.bib*
+  
+. . .
 
 ````make
 output/content.slides.html: src/content.md Makefile refs.bib
+pandoc --template=pandoc_custom/templates/revealjs.template \
+-s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+--filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
+--bibliography=refs.bib \
+-o output/content.slides.html src/content.md
+````
+
+## Build targets
+
+- you can build **individual targets** by calling `Make` on them:
+  
+  ````sh
+  
+  make output/content.slides.html
+  ````
+  
+. . .
+
+- if no argument is specified, `Make` automatically builds the **first
+  target** appearing in a `Makefile`
+  
+  
+##
+
+- additional **pdf** output target:
+  
+````make
+output/content.pdf: src/content.md Makefile refs.bib
+pandoc -s -t beamer -f markdown \
+--slide-level=2 \
+-V theme=CambridgeUS -V colortheme=dolphin \
+-V header-includes=\\hypersetup{colorlinks\=true} \
+-V header-includes=\\hypersetup{urlcolor\=blue} \
+-V header-includes=\\hypersetup{linkcolor\=blue} \
+-V header-includes=\\usepackage{hyperref} \
+-V urlcolor=blue \
+-V linkcolor=blue \
+--mathjax \
+--filter pandoc_custom/filters/skip_pause.hs \
+--filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
+--bibliography=refs.bib \
+-o output/content.pdf src/content.md
+````
+
+## [Automatic variables](http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html)
+
+- targets and dependencies are frequently referenced in make rule
+  
+. . .
+
+$\Rightarrow$ shortcuts: **automatic variables**
+
+. . .
+
+- `$@` represents target
+  
+. . .
+
+- `$<` represents first dependency
+  
+## Example
+
+````
+output/content.pdf: src/content.md Makefile refs.bib
+pandoc -s -t beamer -f markdown \
+--slide-level=2 \
+-V theme=CambridgeUS -V colortheme=dolphin \
+-V header-includes=\\hypersetup{colorlinks\=true} \
+-V header-includes=\\hypersetup{urlcolor\=blue} \
+-V header-includes=\\hypersetup{linkcolor\=blue} \
+-V header-includes=\\usepackage{hyperref} \
+-V urlcolor=blue \
+-V linkcolor=blue \
+--mathjax \
+--filter pandoc_custom/filters/skip_pause.hs \
+--filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
+--bibliography=refs.bib \
+-o $@ $<
+````
+
+## Dummy targets
+
+- to subsume multiple targets create **dummy target** that will never
+  be created itself:
+  
+. . .
+
+````
+all: output/content.pdf output/content.slides.html
+````
+
+## Variables
+
+- define re-occuring parts at single location
+  
+. . .
+
+$\Rightarrow$ use variables
+
+````
+
+OUTDIR = output
+
+$(OUTDIR)/content.slides.html: src/content.md Makefile refs.bib
 	pandoc --template=pandoc_custom/templates/revealjs.template \
 	-s -V revealjs-url=../reveal.js -t revealjs -f markdown \
 	--filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
 	--bibliography=refs.bib \
-	-o output/content.slides.html src/content.md
+	-o $@ $<
 ````
 
-## 
+## [Pattern rules](http://www.gnu.org/software/make/manual/html_node/Pattern-Rules.html#Pattern-Rules)
 
-- you can build individual targets by calling `Make` on them:
+- applying identical rules to multiple targets
 
-	````sh
-	
-	make output/content.slides.html
-	````
+. . .
 
-- if no argument is specified, `Make` automatically builds the first
-  target appearing in a `Makefile`
-
-
-##
-
-- adding an additional output target
-
-````make
-
-
+````
+$(OUTDIR)/*.slides.html: src/*.md Makefile refs.bib
+pandoc --template=pandoc_custom/templates/revealjs.template \
+-s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+--filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
+--bibliography=refs.bib \
+-o $@ $<
 ````
 
 
-##
-
-dummy targets:
-
-- use dummy targets to subsume multiple targets
-
-## Additional resources
+## Resources
 
 - Make lessons at [Software Carpentry](http://software-carpentry.org/v4/make/index.html)
-
-# coding: best practices
-
-##
-- [Programming style guidelines](https://grollchristian.wordpress.com/2013/08/16/programming-style-guidelines-r-and-matlab/)
-- [Julia style guide](http://julia.readthedocs.org/en/latest/manual/style-guide/)
-
-# [Julia](http://julialang.org/)
-
-##
-- [IJulia](https://github.com/JuliaLang/IJulia.jl)
-- [JuliaBox](https://juliabox.org/)
-- notebook files
-  
-# Notebook environments
-
-##
-- [beaker notebook](http://beakernotebook.com/)
-- [Jupyter](http://jupyter.org/)
-  
-## R Users
-
-- [Coursera: R Programming](https://www.coursera.org/course/rprog)
-- [R Markdown](http://rmarkdown.rstudio.com/)
-- [Slidify](http://slidify.org/)
-- [RPubs](http://www.rpubs.com/)
-- [RStudio git support](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN)
-- [Presenting your findings with R](https://grollchristian.wordpress.com/2013/09/07/presentations-in-r/)
-
-## Visualization
-
-- [A layered grammar of
-  graphics](http://vita.had.co.nz/papers/layered-grammar.html) 
-
-## Data manipulation
-
-- [Tidy data](http://vita.had.co.nz/papers/tidy-data.html)
-- [The split-apply-combine strategy for data
-  analysis](http://vita.had.co.nz/papers/plyr.html)
-- [Google refine](https://code.google.com/p/google-refine/)
-
-## What others say
-
-- [Hadley Wickham](http://hadley.wickham.usesthis.com/)
-- [Kieran Healy](http://kieranhealy.org/resources/)
-- [Coursera: Reproducible Research](https://www.coursera.org/course/repdata)
-- [Gregory Wilson](http://www2.ccr.buffalo.edu/halfon/courses/Resources%20for%20Students%20and%20Postdocs/other_docs/Wilson_2006_American%20Scientist.pdf)
-
-## Miscellaneous
-
-- docker
-- aws
-  
-## References
 
 
