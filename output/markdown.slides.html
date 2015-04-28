@@ -143,10 +143,12 @@
         <li>indicated by <strong>backticks</strong> or <strong>indentation</strong></li>
         </ul>
         <div class="fragment">
-        <pre><code>function addTwo(x)
+        <pre><code>        ````
+        function addTwo(x)
         return x+2
-        end</code></pre>
-        <pre><code>function addTwo(x)
+        end
+        ````</code></pre>
+        <pre><code>        function addTwo(x)
         return x+2
         end</code></pre>
         </div>
@@ -253,16 +255,17 @@
         <h1></h1>
         <p>Better solution for setting paths:</p>
         <ul>
-        <li>use customized pandoc <a href="https://github.com/cgroll/pandoc_custom">template files</a></li>
+        <li><p>use customized pandoc <a href="https://github.com/cgroll/pandoc_custom">template files</a></p>
+        <pre class="sh"><code>
+        git clone https://github.com/cgroll/pandoc_custom.git</code></pre></li>
         </ul>
-        <p>````sh</p>
-        <p>git clone https://github.com/cgroll/pandoc_custom.git ````</p>
         <div class="fragment">
         <ul>
-        <li>or as <strong>git subtree</strong>:</li>
+        <li><p>or as <strong>git subtree</strong>:</p>
+        <pre class="sh"><code>
+        git subtree add --prefix pandoc_custom \
+        https://github.com/cgroll/pandoc_custom.git master --squash</code></pre></li>
         </ul>
-        <p>````sh</p>
-        <p>git subtree add --prefix pandoc_custom<br /> https://github.com/cgroll/pandoc_custom.git master --squash ````</p>
         </div>
         </section><section id="section-9" class="slide level2">
         <h1></h1>
@@ -273,7 +276,7 @@
         <ul>
         <li><strong>point to</strong> customized pandoc settings during call</li>
         </ul>
-        <pre><code>pandoc --template=pandoc_custom/templates/revealjs.template \
+        <pre><code>    pandoc --template=pandoc_custom/templates/revealjs.template \
         -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
         -o output/content.slides.html src/content.md</code></pre>
         </div>
@@ -300,7 +303,7 @@
         <ul>
         <li>include <strong>MathJax</strong> code in reveal.js <strong>template</strong>:</li>
         </ul>
-        <pre><code>&lt;!-- include local MathJax --&gt;
+        <pre><code>        &lt;!-- include local MathJax --&gt;
         &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
         MathJax.Hub.Config({
         &quot;HTML-CSS&quot;: {
@@ -582,15 +585,19 @@
         <h1></h1>
         <p>Starting small</p>
         <ul>
-        <li><strong>bash script</strong>: create file <code>export.sh</code> with content</li>
+        <li><p><strong>bash script</strong>: create file <code>export.sh</code> with content</p>
+        <pre class="sh"><code>
+        pandoc --template=pandoc_custom/templates/revealjs.template \
+        -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+        --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \   
+        --bibliography=refs.bib \
+        -o output/content.slides.html src/content.md</code></pre></li>
         </ul>
-        <p>````sh</p>
-        <p>pandoc --template=pandoc_custom/templates/revealjs.template<br /> -s -V revealjs-url=../reveal.js -t revealjs -f markdown<br /> --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl  <br /> --bibliography=refs.bib<br /> -o output/content.slides.html src/content.md ````</p>
         <div class="fragment">
         <ul>
-        <li>call script with</li>
+        <li><p>call script with</p>
+        <pre class="sh"><code>sh export.sh   </code></pre></li>
         </ul>
-        <p><code>sh   sh export.sh</code></p>
         </div>
         </section><section id="section-25" class="slide level2">
         <h1></h1>
@@ -631,9 +638,10 @@
         </ul>
         <div class="fragment">
         <ul>
-        <li>syntax:</li>
+        <li><p>syntax:</p>
+        <pre class="make"><code>target: dependency1 dependency2
+        target rule</code></pre></li>
         </ul>
-        <p><code>make   target: dependency1 dependency2   target rule</code></p>
         </div>
         <div class="fragment">
         <ul>
@@ -664,10 +672,10 @@
         </section><section id="build-targets" class="slide level2">
         <h1>Build targets</h1>
         <ul>
-        <li>you can build <strong>individual targets</strong> by calling <code>Make</code> on them:</li>
+        <li><p>you can build <strong>individual targets</strong> by calling <code>Make</code> on them:</p>
+        <pre class="sh"><code>
+        make output/content.slides.html</code></pre></li>
         </ul>
-        <p>````sh</p>
-        <p>make output/content.slides.html ````</p>
         <div class="fragment">
         <ul>
         <li>if no argument is specified, <code>Make</code> automatically builds the <strong>first target</strong> appearing in a <code>Makefile</code></li>
@@ -771,6 +779,10 @@
         <ul>
         <li>Make lessons at <a href="http://software-carpentry.org/v4/make/index.html">Software Carpentry</a></li>
         </ul>
+        </section></section>
+        <section><section id="references" class="titleslide slide level1"><h1>References</h1></section><section id="section-29" class="slide level2">
+        <h1></h1>
+        <h3 id="cited-in-pandoc-chapter" class="unnumbered">Cited in pandoc chapter:</h3>
         <div class="references">
         <p>Rubinstein, M., 2002. Markowitz’s “Portfolio Selection”: A Fifty-Year Retrospective. The Journal of Finance 57, 1041–1045.</p>
         </div>
