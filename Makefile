@@ -30,6 +30,21 @@ $(OUTDIR)/markdown.slides.html: src/markdown.md Makefile refs.bib
 	--bibliography=refs.bib \
 	-o output/markdown.slides.html src/markdown.md
 
+$(OUTDIR)/markdown.pdf: src/markdown.md Makefile refs.bib
+	pandoc -s -t beamer -f markdown \
+	--slide-level=2 \
+	-V theme=CambridgeUS -V colortheme=dolphin \
+	-V header-includes=\\hypersetup{colorlinks\=true} \
+	-V header-includes=\\hypersetup{urlcolor\=blue} \
+	-V header-includes=\\hypersetup{linkcolor\=blue} \
+	-V header-includes=\\usepackage{hyperref} \
+	-V urlcolor=blue \
+	-V linkcolor=blue \
+	--mathjax \
+	--filter pandoc_custom/filters/skip_pause.hs \
+	--filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
+	--bibliography=refs.bib \
+	-o $@ $<
 
 ## git 
 #######
