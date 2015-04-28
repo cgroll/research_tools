@@ -137,6 +137,19 @@
         <li><em>single asterisks</em></li>
         <li><strong>double asterisks</strong></li>
         </ul>
+        </section><section id="code-blocks" class="slide level2">
+        <h1>Code blocks</h1>
+        <ul>
+        <li>indicated by <strong>backticks</strong> or <strong>indentation</strong></li>
+        </ul>
+        <div class="fragment">
+        <pre><code>function addTwo(x)
+        return x+2
+        end</code></pre>
+        <pre><code>function addTwo(x)
+        return x+2
+        end</code></pre>
+        </div>
         </section></section>
         <section><section id="pandoc" class="titleslide slide level1"><h1><a href="http://johnmacfarlane.net/pandoc/">pandoc</a></h1></section><section id="section-1" class="slide level2">
         <h1></h1>
@@ -240,28 +253,27 @@
         <h1></h1>
         <p>Better solution for setting paths:</p>
         <ul>
-        <li><p>use customized pandoc <a href="https://github.com/cgroll/pandoc_custom">template files</a></p>
-        <pre class="sh"><code>
-        git clone https://github.com/cgroll/pandoc_custom.git</code></pre></li>
+        <li>use customized pandoc <a href="https://github.com/cgroll/pandoc_custom">template files</a></li>
         </ul>
+        <p>````sh</p>
+        <p>git clone https://github.com/cgroll/pandoc_custom.git ````</p>
         <div class="fragment">
         <ul>
-        <li><p>or as <strong>git subtree</strong>:</p>
-        <pre class="sh"><code>
-        git subtree add --prefix pandoc_custom \
-        https://github.com/cgroll/pandoc_custom.git master --squash</code></pre></li>
+        <li>or as <strong>git subtree</strong>:</li>
         </ul>
+        <p>````sh</p>
+        <p>git subtree add --prefix pandoc_custom<br /> https://github.com/cgroll/pandoc_custom.git master --squash ````</p>
         </div>
         </section><section id="section-9" class="slide level2">
         <h1></h1>
         <ul>
-        <li>set reveal.js path in template according to your needs</li>
+        <li>set reveal.js <strong>path</strong> in <strong>template</strong> according to your needs</li>
         </ul>
         <div class="fragment">
         <ul>
-        <li>use customized pandoc settings during call</li>
+        <li><strong>point to</strong> customized pandoc settings during call</li>
         </ul>
-        <pre><code>      pandoc --template=pandoc_custom/templates/revealjs.template \
+        <pre><code>pandoc --template=pandoc_custom/templates/revealjs.template \
         -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
         -o output/content.slides.html src/content.md</code></pre>
         </div>
@@ -286,9 +298,9 @@
         </section><section id="section-10" class="slide level2">
         <h1></h1>
         <ul>
-        <li>include MathJax code in template:</li>
+        <li>include <strong>MathJax</strong> code in reveal.js <strong>template</strong>:</li>
         </ul>
-        <pre><code>        &lt;!-- include local MathJax --&gt;
+        <pre><code>&lt;!-- include local MathJax --&gt;
         &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
         MathJax.Hub.Config({
         &quot;HTML-CSS&quot;: {
@@ -318,19 +330,24 @@
         </ul>
         <div class="fragment">
         <ul>
-        <li><p>labeled and numbered equation, <strong>html</strong>:</p>
-        <pre class="sourceCode latex"><code class="sourceCode latex">
-        $$<span class="al">\begin{equation}</span>
-        \alpha = \beta
-        \label{eq:sample}
-        <span class="al">\end{equation}</span>$$</code></pre></li>
-        <li><p>same formula for <strong>pdf</strong> output:</p>
-        <pre class="sourceCode latex"><code class="sourceCode latex">
-        \begin{equation}
-        \alpha = \beta
-        \label{eq:sample}
-        \end{equation}</code></pre></li>
+        <li>labeled and numbered equation, <strong>html</strong>:</li>
         </ul>
+        <p>````latex</p>
+        <p><br /><span class="math">$$\begin{equation}
+          \alpha = \beta
+          \label{eq:sample}
+          \end{equation}$$</span><br /> ````</p>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>same formula for <strong>pdf</strong> output:</li>
+        </ul>
+        <p>````latex</p>
+         <br /><span class="math">$$\begin{equation}
+          \alpha = \beta
+          \label{eq:sample}
+          \end{equation}$$</span><br />
+        <p>````</p>
         </div>
         </section><section id="pandoc-core" class="slide level2">
         <h1>pandoc <strong>core</strong></h1>
@@ -353,17 +370,25 @@
         ,Para [Math DisplayMath &quot;\\begin{equation}\n\\alpha = \\beta\n\\label{eq:sample}\n\\end{equation}&quot;]
         ,RawBlock (Format &quot;latex&quot;) &quot;\\begin{equation}\n\\alpha = \\beta\n\\label{eq:sample}\n\\end{equation}&quot;</code></pre>
         <div class="fragment">
-        <p><span class="math"> ⇒ </span> using <strong>--filter</strong> option allows <strong>pre-processing</strong> of the parsed document</p>
+        <ul>
+        <li>using <strong>--filter</strong> option allows <strong>pre-processing</strong> of the parsed document</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <p><span class="math"> ⇒ </span> <strong>convert</strong> RawBlock to Math DisplayMath for <strong>html</strong> output</p>
         </div>
         </section><section id="section-13" class="slide level2">
         <h1></h1>
         <ul>
-        <li>using <strong>amsmath.hs</strong> filter to allow raw latex syntax for html also</li>
+        <li><strong>amsmath.hs</strong> filter allows raw latex syntax for html</li>
         </ul>
-        <pre><code>      pandoc --template=pandoc_custom/templates/revealjs.template \
+        <pre><code>pandoc --template=pandoc_custom/templates/revealjs.template \
         -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
         --filter pandoc_custom/filters/amsmath.hs \
         -o output/content.slides.html src/content.md</code></pre>
+        <div class="fragment">
+        <p><span class="math"> ⇒ </span> writing equations without $$</p>
+        </div>
         </section><section id="section-14" class="slide level2">
         <h1></h1>
         <ul>
@@ -417,7 +442,7 @@
         </section><section id="section-17" class="slide level2">
         <h1></h1>
         <ul>
-        <li>referring to equations in text</li>
+        <li><strong>referring</strong> to equations in text</li>
         </ul>
         <pre><code>
         Referring to equations $\eqref{eq:sample}$, $\eqref{eq:splitSample}$
@@ -435,6 +460,9 @@
         <pre class="sh"><code>
         pandoc -t latex -f markdown -s -o output/content.tex</code></pre>
         </div>
+        </section><section id="todo" class="slide level2">
+        <h1>TODO</h1>
+        <p>Theorem environments: <a href="https://github.com/aphorisme/AphoFilters/blob/master/src/Text/Pandoc/AphoFilters/MathThm.hs">AphoFilters</a></p>
         </section></section>
         <section><section id="citations-csl" class="titleslide slide level1"><h1>Citations: CSL</h1></section><section id="section-18" class="slide level2">
         <h1></h1>
@@ -447,14 +475,14 @@
         </section><section id="section-19" class="slide level2">
         <h1></h1>
         <ul>
-        <li>Linux installation:</li>
+        <li>Linux <strong>installation</strong>, if not already included by pandoc:</li>
         </ul>
         <pre class="sh"><code>
         sudo apt-get install pandoc-citeproc</code></pre>
         </section><section id="section-20" class="slide level2">
         <h1></h1>
         <ul>
-        <li>keep list of references in bibtex format</li>
+        <li>keep list of references in <strong>bibtex</strong> format</li>
         </ul>
         <pre><code>@article{citeulike:1232469,
         author = {Rubinstein, Mark},
@@ -482,23 +510,23 @@
         </div>
         <div class="fragment">
         <ul>
-        <li>export bibtex from <a href="http://www.citeulike.org/user/felixroudier/author/Rubinstein">page</a></li>
+        <li><strong>export bibtex</strong> from <a href="http://www.citeulike.org/user/felixroudier/author/Rubinstein">page</a></li>
         </ul>
         </div>
         </section><section id="citation-style-language" class="slide level2">
         <h1><a href="http://citationstyles.org/">Citation Style Language</a></h1>
         <ul>
-        <li>define style of references and bibliography in <em>.csl</em> file</li>
+        <li>define <strong>style</strong> of references and bibliography in <strong>.csl</strong> file</li>
         </ul>
         <div class="fragment">
         <ul>
-        <li><a href="http://editor.citationstyles.org/about/">search citation styles</a></li>
+        <li>find appropriate style: <a href="http://editor.citationstyles.org/about/">search citation styles</a></li>
         </ul>
         </div>
         </section><section id="section-22" class="slide level2">
         <h1></h1>
         <ul>
-        <li>pre-process citations in pandoc</li>
+        <li><strong>pre-process</strong> citations through <strong>filter</strong></li>
         </ul>
         <pre><code>
         pandoc --template=pandoc_custom/templates/revealjs.template \
@@ -520,15 +548,16 @@
         <li>references will appear automatically in bibliography at the end</li>
         </ul>
         </div>
-        </section><section id="section-24" class="slide level2">
-        <h1></h1>
-        <p>Internal links</p>
+        </section><section id="internal-links" class="slide level2">
+        <h1>Internal links</h1>
         <ul>
         <li>link to section</li>
         </ul>
         <pre><code>
         Still remember [the pandoc introduction](#pandoc)?</code></pre>
-        <p>Still remember <a href="#/pandoc">the pandoc introduction</a>?</p>
+        <div class="fragment">
+        <p><strong>Output</strong>: Still remember <a href="#/pandoc">the pandoc introduction</a>?</p>
+        </div>
         </section><section id="resources" class="slide level2">
         <h1>Resources</h1>
         <ul>
@@ -538,7 +567,7 @@
         </ul>
         </section><section id="pandoc-alternatives" class="slide level2">
         <h1>Pandoc alternatives</h1>
-        <p>you could also circumvent raw LaTeX with:</p>
+        <p>You could also circumvent raw LaTeX with:</p>
         <ul>
         <li><a href="www.lyx.org">LyX</a></li>
         <li><a href="http://orgmode.org/">emacs org-mode</a></li>
@@ -547,91 +576,211 @@
         <section><section id="make" class="titleslide slide level1"><h1><a href="http://www.gnu.org/software/make/">Make</a></h1></section><section id="automation" class="slide level2">
         <h1>Automation</h1>
         <ul>
-        <li>using command line allows for easy automation of repetitive tasks</li>
+        <li>using command line allows for easy <strong>automation</strong> of <strong>repetitive tasks</strong></li>
         <li>GUIs and mouse clicks are a lot less easy to automate</li>
         </ul>
-        </section><section id="section-25" class="slide level2">
+        </section><section id="section-24" class="slide level2">
         <h1></h1>
         <p>Starting small</p>
         <ul>
-        <li><p>bash script: create file <code>export.sh</code> with content</p>
-        <pre class="sh"><code>
-        pandoc --template=pandoc_custom/templates/revealjs.template \
-        -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
-        --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \   
-        --bibliography=refs.bib \
-        -o output/content.slides.html src/content.md</code></pre></li>
-        <li><p>call script with</p>
-        <pre class="sh"><code>sh export.sh   </code></pre></li>
+        <li><strong>bash script</strong>: create file <code>export.sh</code> with content</li>
         </ul>
+        <p>````sh</p>
+        <p>pandoc --template=pandoc_custom/templates/revealjs.template<br /> -s -V revealjs-url=../reveal.js -t revealjs -f markdown<br /> --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl  <br /> --bibliography=refs.bib<br /> -o output/content.slides.html src/content.md ````</p>
+        <div class="fragment">
+        <ul>
+        <li>call script with</li>
+        </ul>
+        <p><code>sh   sh export.sh</code></p>
+        </div>
+        </section><section id="section-25" class="slide level2">
+        <h1></h1>
+        <p>Wishful improvements:</p>
+        <ul>
+        <li>only execute command, <strong>if</strong> source file was <strong>modified</strong></li>
+        </ul>
+        <div class="fragment">
+        <ul>
+        <li>subsume multiple commands with <strong>pattern rules</strong></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <p><span class="math"> ⇒ </span> use a <code>Makefile</code></p>
+        </div>
         </section><section id="section-26" class="slide level2">
         <h1></h1>
-        <p>Improvements:</p>
         <ul>
-        <li>only execute command, if source file was modified</li>
-        <li>subsume multiple commands with pattern rules</li>
+        <li>specify <strong>target files</strong> together with <strong>dependencies</strong></li>
         </ul>
-        <p><span class="math"> ⇒ </span> use a <code>Makefile</code></p>
+        <div class="fragment">
+        <p><strong>conditional execution</strong>: command is executed, if</p>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>target file does not exist</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>timestamp of last modification of dependency is more recent than last modification of target file</li>
+        </ul>
+        </div>
         </section><section id="section-27" class="slide level2">
         <h1></h1>
         <ul>
-        <li>set target files with dependencies</li>
-        <li>conditional execution: command is executed, if:</li>
-        <li>target file does not exist</li>
-        <li>last modification of dependency is more recent than last modification of target file</li>
+        <li>create file called <strong>Makefile</strong></li>
         </ul>
+        <div class="fragment">
+        <ul>
+        <li>syntax:</li>
+        </ul>
+        <p><code>make   target: dependency1 dependency2   target rule</code></p>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li>important: line with target rule MUST start with <strong>TAB</strong></li>
+        </ul>
+        </div>
+        </section><section id="example" class="slide level2">
+        <h1>Example</h1>
+        <p>pandoc slide creation:</p>
+        <div class="fragment">
+        <ul>
+        <li><strong>target</strong>: <em>output/content.slides.html</em></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li><strong>dependencies</strong>: <em>src/content.md</em>, <em>Makefile</em> and <em>refs.bib</em></li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <pre class="make"><code>output/content.slides.html: src/content.md Makefile refs.bib
+        pandoc --template=pandoc_custom/templates/revealjs.template \
+        -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+        --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
+        --bibliography=refs.bib \
+        -o output/content.slides.html src/content.md</code></pre>
+        </div>
+        </section><section id="build-targets" class="slide level2">
+        <h1>Build targets</h1>
+        <ul>
+        <li>you can build <strong>individual targets</strong> by calling <code>Make</code> on them:</li>
+        </ul>
+        <p>````sh</p>
+        <p>make output/content.slides.html ````</p>
+        <div class="fragment">
+        <ul>
+        <li>if no argument is specified, <code>Make</code> automatically builds the <strong>first target</strong> appearing in a <code>Makefile</code></li>
+        </ul>
+        </div>
         </section><section id="section-28" class="slide level2">
         <h1></h1>
         <ul>
-        <li>create <code>Makefile</code></li>
-        <li><p><code>Make</code> syntax:</p>
-        <pre class="make"><code>target: dependency1 dependency2
-            target rule</code></pre></li>
-        <li><p>important: line with target rule MUST start with TAB</p></li>
+        <li>additional <strong>pdf</strong> output target:</li>
         </ul>
-        </section><section id="usecase-pandoc-slide-creation" class="slide level2">
-        <h1>Usecase: pandoc slide creation</h1>
-        <pre class="make"><code>output/content.slides.html: src/content.md Makefile refs.bib
+        <pre class="make"><code>output/content.pdf: src/content.md Makefile refs.bib
+        pandoc -s -t beamer -f markdown \
+        --slide-level=2 \
+        -V theme=CambridgeUS -V colortheme=dolphin \
+        -V header-includes=\\hypersetup{colorlinks\=true} \
+        -V header-includes=\\hypersetup{urlcolor\=blue} \
+        -V header-includes=\\hypersetup{linkcolor\=blue} \
+        -V header-includes=\\usepackage{hyperref} \
+        -V urlcolor=blue \
+        -V linkcolor=blue \
+        --mathjax \
+        --filter pandoc_custom/filters/skip_pause.hs \
+        --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
+        --bibliography=refs.bib \
+        -o output/content.pdf src/content.md</code></pre>
+        </section><section id="automatic-variables" class="slide level2">
+        <h1><a href="http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html">Automatic variables</a></h1>
+        <ul>
+        <li>targets and dependencies are frequently referenced in make rule</li>
+        </ul>
+        <div class="fragment">
+        <p><span class="math"> ⇒ </span> shortcuts: <strong>automatic variables</strong></p>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li><code>$@</code> represents target</li>
+        </ul>
+        </div>
+        <div class="fragment">
+        <ul>
+        <li><code>$&lt;</code> represents first dependency</li>
+        </ul>
+        </div>
+        </section><section id="example-1" class="slide level2">
+        <h1>Example</h1>
+        <pre><code>output/content.pdf: src/content.md Makefile refs.bib
+        pandoc -s -t beamer -f markdown \
+        --slide-level=2 \
+        -V theme=CambridgeUS -V colortheme=dolphin \
+        -V header-includes=\\hypersetup{colorlinks\=true} \
+        -V header-includes=\\hypersetup{urlcolor\=blue} \
+        -V header-includes=\\hypersetup{linkcolor\=blue} \
+        -V header-includes=\\usepackage{hyperref} \
+        -V urlcolor=blue \
+        -V linkcolor=blue \
+        --mathjax \
+        --filter pandoc_custom/filters/skip_pause.hs \
+        --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
+        --bibliography=refs.bib \
+        -o $@ $&lt;</code></pre>
+        </section><section id="dummy-targets" class="slide level2">
+        <h1>Dummy targets</h1>
+        <ul>
+        <li>to subsume multiple targets create <strong>dummy target</strong> that will never be created itself:</li>
+        </ul>
+        <div class="fragment">
+        <pre><code>all: output/content.pdf output/content.slides.html</code></pre>
+        </div>
+        </section><section id="variables" class="slide level2">
+        <h1>Variables</h1>
+        <ul>
+        <li>define re-occuring parts at single location</li>
+        </ul>
+        <div class="fragment">
+        <p><span class="math"> ⇒ </span> use variables</p>
+        <pre><code>
+        OUTDIR = output
+        
+        $(OUTDIR)/content.slides.html: src/content.md Makefile refs.bib
             pandoc --template=pandoc_custom/templates/revealjs.template \
             -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
             --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
             --bibliography=refs.bib \
-            -o output/content.slides.html src/content.md</code></pre>
-        </section><section id="section-29" class="slide level2">
-        <h1></h1>
+            -o $@ $&lt;</code></pre>
+        </div>
+        </section><section id="pattern-rules" class="slide level2">
+        <h1><a href="http://www.gnu.org/software/make/manual/html_node/Pattern-Rules.html#Pattern-Rules">Pattern rules</a></h1>
         <ul>
-        <li><p>you can build individual targets by calling <code>Make</code> on them:</p>
-        <pre class="sh"><code>
-        make output/content.slides.html</code></pre></li>
-        <li><p>if no argument is specified, <code>Make</code> automatically builds the first target appearing in a <code>Makefile</code></p></li>
+        <li>applying identical rules to multiple targets</li>
         </ul>
-        </section><section id="section-30" class="slide level2">
-        <h1></h1>
-        <ul>
-        <li>adding an additional output target</li>
-        </ul>
-        <pre class="make"><code>
-        </code></pre>
-        </section><section id="section-31" class="slide level2">
-        <h1></h1>
-        <p>dummy targets:</p>
-        <ul>
-        <li>use dummy targets to subsume multiple targets</li>
-        </ul>
-        </section><section id="additional-resources" class="slide level2">
-        <h1>Additional resources</h1>
+        <div class="fragment">
+        <pre><code>$(OUTDIR)/*.slides.html: src/*.md Makefile refs.bib
+        pandoc --template=pandoc_custom/templates/revealjs.template \
+        -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+        --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
+        --bibliography=refs.bib \
+        -o $@ $&lt;</code></pre>
+        </div>
+        </section><section id="resources-1" class="slide level2">
+        <h1>Resources</h1>
         <ul>
         <li>Make lessons at <a href="http://software-carpentry.org/v4/make/index.html">Software Carpentry</a></li>
         </ul>
         </section></section>
-        <section><section id="coding-best-practices" class="titleslide slide level1"><h1>coding: best practices</h1></section><section id="section-32" class="slide level2">
+        <section><section id="coding-best-practices" class="titleslide slide level1"><h1>coding: best practices</h1></section><section id="section-29" class="slide level2">
         <h1></h1>
         <ul>
         <li><a href="https://grollchristian.wordpress.com/2013/08/16/programming-style-guidelines-r-and-matlab/">Programming style guidelines</a></li>
         <li><a href="http://julia.readthedocs.org/en/latest/manual/style-guide/">Julia style guide</a></li>
         </ul>
         </section></section>
-        <section><section id="julia" class="titleslide slide level1"><h1><a href="http://julialang.org/">Julia</a></h1></section><section id="section-33" class="slide level2">
+        <section><section id="julia" class="titleslide slide level1"><h1><a href="http://julialang.org/">Julia</a></h1></section><section id="section-30" class="slide level2">
         <h1></h1>
         <ul>
         <li><a href="https://github.com/JuliaLang/IJulia.jl">IJulia</a></li>
@@ -639,7 +788,7 @@
         <li>notebook files</li>
         </ul>
         </section></section>
-        <section><section id="notebook-environments" class="titleslide slide level1"><h1>Notebook environments</h1></section><section id="section-34" class="slide level2">
+        <section><section id="notebook-environments" class="titleslide slide level1"><h1>Notebook environments</h1></section><section id="section-31" class="slide level2">
         <h1></h1>
         <ul>
         <li><a href="http://beakernotebook.com/">beaker notebook</a></li>
