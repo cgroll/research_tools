@@ -330,24 +330,23 @@
         </ul>
         <div class="fragment">
         <ul>
-        <li>labeled and numbered equation, <strong>html</strong>:</li>
+        <li><p>labeled and numbered equation, <strong>html</strong>:</p>
+        <pre class="sourceCode latex"><code class="sourceCode latex">
+        $$<span class="al">\begin{equation}</span>
+        \alpha = \beta
+        \label{eq:sample}
+        <span class="al">\end{equation}</span>$$</code></pre></li>
         </ul>
-        <p>````latex</p>
-        <p><br /><span class="math">$$\begin{equation}
-          \alpha = \beta
-          \label{eq:sample}
-          \end{equation}$$</span><br /> ````</p>
         </div>
         <div class="fragment">
         <ul>
-        <li>same formula for <strong>pdf</strong> output:</li>
+        <li><p>same formula for <strong>pdf</strong> output:</p>
+        <pre class="sourceCode latex"><code class="sourceCode latex">
+        \begin{equation}
+        \alpha = \beta
+        \label{eq:sample}
+        \end{equation}</code></pre></li>
         </ul>
-        <p>````latex</p>
-         <br /><span class="math">$$\begin{equation}
-          \alpha = \beta
-          \label{eq:sample}
-          \end{equation}$$</span><br />
-        <p>````</p>
         </div>
         </section><section id="pandoc-core" class="slide level2">
         <h1>pandoc <strong>core</strong></h1>
@@ -748,11 +747,11 @@
         OUTDIR = output
         
         $(OUTDIR)/content.slides.html: src/content.md Makefile refs.bib
-            pandoc --template=pandoc_custom/templates/revealjs.template \
-            -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
-            --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
-            --bibliography=refs.bib \
-            -o $@ $&lt;</code></pre>
+        pandoc --template=pandoc_custom/templates/revealjs.template \
+        -s -V revealjs-url=../reveal.js -t revealjs -f markdown \
+        --filter pandoc-citeproc --csl=pandoc_custom/csl/elsevier-harvard.csl \
+        --bibliography=refs.bib \
+        -o $@ $&lt;</code></pre>
         </div>
         </section><section id="pattern-rules" class="slide level2">
         <h1><a href="http://www.gnu.org/software/make/manual/html_node/Pattern-Rules.html#Pattern-Rules">Pattern rules</a></h1>
@@ -772,66 +771,6 @@
         <ul>
         <li>Make lessons at <a href="http://software-carpentry.org/v4/make/index.html">Software Carpentry</a></li>
         </ul>
-        </section></section>
-        <section><section id="coding-best-practices" class="titleslide slide level1"><h1>coding: best practices</h1></section><section id="section-29" class="slide level2">
-        <h1></h1>
-        <ul>
-        <li><a href="https://grollchristian.wordpress.com/2013/08/16/programming-style-guidelines-r-and-matlab/">Programming style guidelines</a></li>
-        <li><a href="http://julia.readthedocs.org/en/latest/manual/style-guide/">Julia style guide</a></li>
-        </ul>
-        </section></section>
-        <section><section id="julia" class="titleslide slide level1"><h1><a href="http://julialang.org/">Julia</a></h1></section><section id="section-30" class="slide level2">
-        <h1></h1>
-        <ul>
-        <li><a href="https://github.com/JuliaLang/IJulia.jl">IJulia</a></li>
-        <li><a href="https://juliabox.org/">JuliaBox</a></li>
-        <li>notebook files</li>
-        </ul>
-        </section></section>
-        <section><section id="notebook-environments" class="titleslide slide level1"><h1>Notebook environments</h1></section><section id="section-31" class="slide level2">
-        <h1></h1>
-        <ul>
-        <li><a href="http://beakernotebook.com/">beaker notebook</a></li>
-        <li><a href="http://jupyter.org/">Jupyter</a></li>
-        </ul>
-        </section><section id="r-users" class="slide level2">
-        <h1>R Users</h1>
-        <ul>
-        <li><a href="https://www.coursera.org/course/rprog">Coursera: R Programming</a></li>
-        <li><a href="http://rmarkdown.rstudio.com/">R Markdown</a></li>
-        <li><a href="http://slidify.org/">Slidify</a></li>
-        <li><a href="http://www.rpubs.com/">RPubs</a></li>
-        <li><a href="https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN">RStudio git support</a></li>
-        <li><a href="https://grollchristian.wordpress.com/2013/09/07/presentations-in-r/">Presenting your findings with R</a></li>
-        </ul>
-        </section><section id="visualization" class="slide level2">
-        <h1>Visualization</h1>
-        <ul>
-        <li><a href="http://vita.had.co.nz/papers/layered-grammar.html">A layered grammar of graphics</a></li>
-        </ul>
-        </section><section id="data-manipulation" class="slide level2">
-        <h1>Data manipulation</h1>
-        <ul>
-        <li><a href="http://vita.had.co.nz/papers/tidy-data.html">Tidy data</a></li>
-        <li><a href="http://vita.had.co.nz/papers/plyr.html">The split-apply-combine strategy for data analysis</a></li>
-        <li><a href="https://code.google.com/p/google-refine/">Google refine</a></li>
-        </ul>
-        </section><section id="what-others-say" class="slide level2">
-        <h1>What others say</h1>
-        <ul>
-        <li><a href="http://hadley.wickham.usesthis.com/">Hadley Wickham</a></li>
-        <li><a href="http://kieranhealy.org/resources/">Kieran Healy</a></li>
-        <li><a href="https://www.coursera.org/course/repdata">Coursera: Reproducible Research</a></li>
-        <li><a href="http://www2.ccr.buffalo.edu/halfon/courses/Resources%20for%20Students%20and%20Postdocs/other_docs/Wilson_2006_American%20Scientist.pdf">Gregory Wilson</a></li>
-        </ul>
-        </section><section id="miscellaneous" class="slide level2">
-        <h1>Miscellaneous</h1>
-        <ul>
-        <li>docker</li>
-        <li>aws</li>
-        </ul>
-        </section><section id="references" class="slide level2 unnumbered">
-        <h1>References</h1>
         <div class="references">
         <p>Rubinstein, M., 2002. Markowitz’s “Portfolio Selection”: A Fifty-Year Retrospective. The Journal of Finance 57, 1041–1045.</p>
         </div>
