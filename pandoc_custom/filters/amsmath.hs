@@ -5,6 +5,6 @@ import Text.Pandoc.Shared
 
 main :: IO ()
 main = toJSONFilter amsmath
-  where amsmath (Para [Math DisplayMath xs]) | (take 6 xs) == "\\begin" = (RawBlock (Format "latex") xs)
+  where amsmath (RawBlock (Format "latex") xs) | (take 6 xs) == "\\begin" = (Plain [Space,Math DisplayMath xs])
         amsmath x = x
 
